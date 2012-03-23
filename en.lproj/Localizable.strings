@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Straeto
+
+  Created by Hjalti Jakobsson on 25.1.2012.
+  Copyright (c) 2012 Hjalti Jakobsson. All rights reserved.
+*/
+
+"RealTimeMap" = "Rauntímakort";
+"Routes" = "Leiðir";
