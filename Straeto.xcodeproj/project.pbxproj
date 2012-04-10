@@ -14,6 +14,7 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* StraetoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* StraetoViewController.m */; };
+		680C8D771525788500F8A338 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C8D751525788500F8A338 /* libTestFlight.a */; };
 		685D953414B61B7500C89ED9 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D951C14B61B7500C89ED9 /* NSObject+SBJson.m */; };
 		685D953514B61B7500C89ED9 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D951F14B61B7500C89ED9 /* SBJsonParser.m */; };
 		685D953614B61B7500C89ED9 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D952114B61B7500C89ED9 /* SBJsonStreamParser.m */; };
@@ -41,6 +42,7 @@
 		685D956A14B63C8D00C89ED9 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 685D956914B63C8D00C89ED9 /* libz.1.2.5.dylib */; };
 		685D956D14B64C3C00C89ED9 /* BusLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D956C14B64C3C00C89ED9 /* BusLocation.m */; };
 		687F654714D7A1C9001E6456 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 687F654614D7A1C9001E6456 /* MainWindow-iPad.xib */; };
+		68889DEF15341ED80078B14E /* bus_stops.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68889DEE15341ED80078B14E /* bus_stops.plist */; };
 		68D5476B14FC7233001899CB /* StraetoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D5476A14FC7233001899CB /* StraetoViewController.xib */; };
 		68DC734814C1FF89009E1A00 /* InAppSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68DC734714C1FF89009E1A00 /* InAppSettings.bundle */; };
 		68DC735C14C20A37009E1A00 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DC735714C20A37009E1A00 /* IASKAppSettingsViewController.m */; };
@@ -91,6 +93,8 @@
 		28D7ACF70DDB3853001CB0EB /* StraetoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StraetoViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Straeto_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Straeto_Prefix.pch; sourceTree = "<group>"; };
+		680C8D751525788500F8A338 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlightLiveSdk/libTestFlight.a; sourceTree = "<group>"; };
+		680C8D761525788500F8A338 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlightLiveSdk/TestFlight.h; sourceTree = "<group>"; };
 		685D951B14B61B7500C89ED9 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJson.h"; path = "JSON/NSObject+SBJson.h"; sourceTree = "<group>"; };
 		685D951C14B61B7500C89ED9 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJson.m"; path = "JSON/NSObject+SBJson.m"; sourceTree = "<group>"; };
 		685D951D14B61B7500C89ED9 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJson.h; path = JSON/SBJson.h; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 		685D956B14B64C3C00C89ED9 /* BusLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusLocation.h; sourceTree = "<group>"; };
 		685D956C14B64C3C00C89ED9 /* BusLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusLocation.m; sourceTree = "<group>"; };
 		687F654614D7A1C9001E6456 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		68889DEE15341ED80078B14E /* bus_stops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = bus_stops.plist; path = Resources/bus_stops.plist; sourceTree = "<group>"; };
 		68D5476A14FC7233001899CB /* StraetoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StraetoViewController.xib; sourceTree = "<group>"; };
 		68DC734714C1FF89009E1A00 /* InAppSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = InAppSettings.bundle; sourceTree = "<group>"; };
 		68DC735614C20A37009E1A00 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IASKAppSettingsViewController.h; path = InAppSettingsKit/Controllers/IASKAppSettingsViewController.h; sourceTree = "<group>"; };
@@ -215,6 +220,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				68FB1B0E14B56C6500468CC7 /* MapKit.framework in Frameworks */,
+				680C8D771525788500F8A338 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				68DC734914C207EA009E1A00 /* InAppSettingsKit */,
+				680C8D741525784B00F8A338 /* TestFlightLive */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -278,6 +285,7 @@
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Straeto-Info.plist */,
 				C05EC89C14D055A2003203A5 /* Localizable.strings */,
+				68889DEE15341ED80078B14E /* bus_stops.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -296,6 +304,15 @@
 				68FB1B0D14B56C6500468CC7 /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		680C8D741525784B00F8A338 /* TestFlightLive */ = {
+			isa = PBXGroup;
+			children = (
+				680C8D751525788500F8A338 /* libTestFlight.a */,
+				680C8D761525788500F8A338 /* TestFlight.h */,
+			);
+			name = TestFlightLive;
 			sourceTree = "<group>";
 		};
 		685D951314B5FF5700C89ED9 /* Icons */ = {
@@ -531,6 +548,7 @@
 				68D5476B14FC7233001899CB /* StraetoViewController.xib in Resources */,
 				68FE3BBD15097213008D9719 /* icon-small~ipad@2x.png in Resources */,
 				68FE3BBE15097213008D9719 /* icon~ipad@2x.png in Resources */,
+				68889DEF15341ED80078B14E /* bus_stops.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +633,10 @@
 				GCC_PREFIX_HEADER = Straeto_Prefix.pch;
 				INFOPLIST_FILE = "Straeto-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightLiveSdk\"",
+				);
 				PRODUCT_NAME = "Strætó";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -636,6 +658,10 @@
 				GCC_PREFIX_HEADER = Straeto_Prefix.pch;
 				INFOPLIST_FILE = "Straeto-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightLiveSdk\"",
+				);
 				PRODUCT_NAME = "Strætó";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

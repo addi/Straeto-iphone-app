@@ -9,6 +9,8 @@
 #import "StraetoAppDelegate.h"
 #import "StraetoViewController.h"
 
+#import "TestFlight.h"
+
 @implementation StraetoAppDelegate
 
 @synthesize window;
@@ -26,6 +28,8 @@
 	// Set the view controller as the window's root view controller and display.
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
+    
+    [TestFlight takeOff:@"14be936da9ef20228395ce36a8e9a666_NzYzMzAyMDEyLTAzLTMwIDAxOjMyOjA1LjE4MzgyNg"];
 
     return YES;
 }

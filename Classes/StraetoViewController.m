@@ -16,6 +16,8 @@
 #import "BusBadgeView.h"
 #import "Constants.h"
 
+#import "TestFlight.h"
+
 @interface StraetoViewController()
 - (NSArray*)findAllPins;
 @end
