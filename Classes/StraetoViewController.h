@@ -17,14 +17,23 @@
     BOOL debug;
     NSMutableArray *pinsToDelete;
     
-    NSArray *routes;
-    NSString *routesUrl;
+    NSArray *allRoutes;
+    
+    NSMutableSet *routes;
+    NSMutableSet *settingsRoutes;
     
     BOOL shouldUpdateView;
     
     BOOL showError;
     
+    BOOL updatePosition;
+    BOOL updateCloseRoutes;
+    
+    CLLocation *centerOfRvk;
+    
     NSTimeInterval lastUpdate;
+    
+    NSMutableArray *busStops;
     
     IASKAppSettingsViewController *appSettingsViewController;
     
@@ -33,8 +42,6 @@
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (readwrite, retain) NSMutableArray *pinsToDelete;
-
-@property (readwrite, retain) NSString *routesUrl;
 
 @property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
 
@@ -47,5 +54,8 @@
 - (void)parseBusData:(NSString *)busDataString;
 
 - (void)loadSettingsView;
+- (void)loadBusStops;
+
+-(void)findCloseBusRutesTo:(CLLocation*)location;
 
 @end

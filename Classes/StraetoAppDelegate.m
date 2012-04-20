@@ -29,7 +29,10 @@
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     
-    [TestFlight takeOff:@"14be936da9ef20228395ce36a8e9a666_NzYzMzAyMDEyLTAzLTMwIDAxOjMyOjA1LjE4MzgyNg"];
+    [TestFlight performSelectorInBackground: @selector(takeOff:) 
+                                 withObject:@"14be936da9ef20228395ce36a8e9a666_NzYzMzAyMDEyLTAzLTMwIDAxOjMyOjA1LjE4MzgyNg"];
+    
+//    [TestFlight takeOff:@"14be936da9ef20228395ce36a8e9a666_NzYzMzAyMDEyLTAzLTMwIDAxOjMyOjA1LjE4MzgyNg"];
 
     return YES;
 }

@@ -15,6 +15,7 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* StraetoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* StraetoViewController.m */; };
 		680C8D771525788500F8A338 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C8D751525788500F8A338 /* libTestFlight.a */; };
+		6856F1CE15355FD100BC0BB5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */; };
 		685D953414B61B7500C89ED9 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D951C14B61B7500C89ED9 /* NSObject+SBJson.m */; };
 		685D953514B61B7500C89ED9 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D951F14B61B7500C89ED9 /* SBJsonParser.m */; };
 		685D953614B61B7500C89ED9 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D952114B61B7500C89ED9 /* SBJsonStreamParser.m */; };
@@ -95,6 +96,7 @@
 		32CA4F630368D1EE00C91783 /* Straeto_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Straeto_Prefix.pch; sourceTree = "<group>"; };
 		680C8D751525788500F8A338 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlightLiveSdk/libTestFlight.a; sourceTree = "<group>"; };
 		680C8D761525788500F8A338 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlightLiveSdk/TestFlight.h; sourceTree = "<group>"; };
+		6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		685D951B14B61B7500C89ED9 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJson.h"; path = "JSON/NSObject+SBJson.h"; sourceTree = "<group>"; };
 		685D951C14B61B7500C89ED9 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJson.m"; path = "JSON/NSObject+SBJson.m"; sourceTree = "<group>"; };
 		685D951D14B61B7500C89ED9 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJson.h; path = JSON/SBJson.h; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6856F1CE15355FD100BC0BB5 /* CoreLocation.framework in Frameworks */,
 				68DC739014C20C13009E1A00 /* MessageUI.framework in Frameworks */,
 				685D956A14B63C8D00C89ED9 /* libz.1.2.5.dylib in Frameworks */,
 				685D956814B63C6E00C89ED9 /* MobileCoreServices.framework in Frameworks */,
@@ -256,6 +259,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */,
 				68DC734914C207EA009E1A00 /* InAppSettingsKit */,
 				680C8D741525784B00F8A338 /* TestFlightLive */,
 				080E96DDFE201D6D7F000001 /* Classes */,

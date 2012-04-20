@@ -8,6 +8,24 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>Stillingar</string>
+		</dict>
+		
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Velja leiðir með gps</string>
+			<key>Key</key>
+			<string>gps_routes</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>Rauðar leiðir</string>
 		</dict>
 		<dict>
@@ -70,7 +88,6 @@
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
-		
 		
 		<dict>
 			<key>Type</key>
@@ -263,6 +280,26 @@
 			<string>Leið 35</string>
 			<key>Key</key>
 			<string>route_35</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Leið 51</string>
+			<key>Key</key>
+			<string>route_51</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Leið 52</string>
+			<key>Key</key>
+			<string>route_52</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
