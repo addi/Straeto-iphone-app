@@ -33,7 +33,6 @@
 {
     [pinsToDelete release];
     [_mapView release];
-    [routes release];
     
     [super dealloc];
 }
@@ -42,14 +41,11 @@
 {
     [super viewDidLoad];
     
-    [self loadBusStops];
-    
-    allRoutes = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"11", @"12", @"13", @"14", @"15", @"17", @"18", @"19", @"21", @"22", @"23", @"24", @"26", @"27", @"28", @"33", @"34", @"35",@"51",@"52",@"57", nil] retain];
-    
-    routes = [[NSMutableSet alloc] init];
-    settingsRoutes = [[NSMutableSet alloc] init];
+//    [self loadBusStops];
     
     pinsToDelete = [[NSMutableArray alloc] init];
+    
+    routes = [[RoutHandler alloc] init];
     
     updatePosition = YES;
     
@@ -72,39 +68,11 @@
     [self busDataUpdater];
 }
 
-- (void)loadBusStops
-{
-    NSString *path = [[NSBundle mainBundle] bundlePath];
-    NSString *finalPath = [path stringByAppendingPathComponent:@"bus_stops.plist"];
-    
-    NSArray *plistBusStops = [NSArray arrayWithContentsOfFile:finalPath];
-    
-    busStops = [[NSMutableArray arrayWithCapacity:[plistBusStops count]] retain];
-    
-    CLLocation *tmpLoc;
-    
-    double tmpLat, tmpLong;
-    
-    NSDictionary *tmpStop;
-    
-    for(NSDictionary *stop in plistBusStops)
-    {
-        tmpLat = [[stop objectForKey:@"lat"] doubleValue];
-        tmpLong = [[stop objectForKey:@"long"] doubleValue];
-        
-        tmpLoc = [[CLLocation alloc] initWithLatitude:tmpLat longitude:tmpLong];
-        
-        tmpStop = [NSDictionary dictionaryWithObjectsAndKeys:tmpLoc, @"location", [stop objectForKey:@"routes"], @"routes", nil];
-                
-        [busStops addObject:tmpStop];
-    }
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self setUpRouteUrlFromSettings];
+    [routes setUpFromSettings];
     
     updateCloseRoutes = YES;
     
@@ -112,21 +80,6 @@
     showError = YES;
     
     [self fetchBusData];
-}
-     
-- (void)setUpRouteUrlFromSettings
-{
-    [routes removeAllObjects];
-    
-    for (NSString *r in allRoutes)
-    {
-        NSString *settingName = [NSString stringWithFormat:@"route_%@", r];
-        
-        if([[NSUserDefaults standardUserDefaults] boolForKey:settingName])
-            [settingsRoutes addObject:r];
-    }
-    
-    [routes unionSet:settingsRoutes];
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -140,48 +93,11 @@
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"gps_routes"])
     {
-//        updateCloseRoutes = NO;
-        
-        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:64.094651 longitude:-21.839232];
-        [self findCloseBusRutesTo:testLocation];
+//        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:64.094651 longitude:-21.839232];
+//        [routes addRoutesByLocation:testLocation];
 
-//        [self findCloseBusRutesTo:userLocation.location];
+        [routes addRoutesByLocation:userLocation.location];
     }
-}
-
--(void)findCloseBusRutesTo:(CLLocation*)location
-{
-    // reset the routes 
-    [routes removeAllObjects];
-    [routes unionSet:settingsRoutes];
-    
-    double accuracy = MAX(location.horizontalAccuracy, location.verticalAccuracy);
-    
-    double maxRadius = (accuracy/2)+kMaxDistanceFromGPS;
-    
-    CLLocation *tmpStopLocation;
-    
-    for(NSDictionary *stop in busStops)
-    {
-        tmpStopLocation = [stop objectForKey:@"location"];
-        
-        double distance = [location distanceFromLocation:tmpStopLocation];
-        
-        if(distance < maxRadius)
-        {
-            NSArray *closeStops = [stop objectForKey:@"routes"];
-            
-            for(NSString *r in closeStops)
-            {
-//                NSLog(@"FOUND: %@", r);
-                
-                [routes addObject:r];
-                
-            }
-            
-        }
-    }
-    
 }
 
 - (IASKAppSettingsViewController*)appSettingsViewController
@@ -213,9 +129,9 @@
 
 - (void)fetchBusData
 {
-//    NSLog(@"routes: %@", routesUrl);
+    NSString *routesUrl = [routes url];
     
-    NSString *routesUrl = [[routes allObjects] componentsJoinedByString:kURLSplitter];
+    NSLog(@"routes: %@", routesUrl);
     
     if ([routesUrl length] <= 0) 
         return;
@@ -232,7 +148,7 @@
     [request setCompletionBlock:^{
         NSString *responseString = [request responseString];
         
-        NSLog(@"responseString: %@", responseString);
+//        NSLog(@"responseString: %@", responseString);
         
         [self parseBusData:responseString];        
     }];
@@ -271,8 +187,6 @@
 - (void)parseBusData:(NSString *)busDataString
 {   
     NSDictionary * root = [busDataString JSONValue];
-    
-    NSLog(@"root: %@", root);
     
     NSArray *routeList = [root objectForKey:@"routes"];
     
@@ -340,9 +254,6 @@
     
     return nil;
 }
-
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

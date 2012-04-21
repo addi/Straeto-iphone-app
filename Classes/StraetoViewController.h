@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+#import "RoutHandler.h"
+
 #import "IASKAppSettingsViewController.h"
 
 @interface StraetoViewController : UIViewController <MKMapViewDelegate>
@@ -17,10 +19,7 @@
     BOOL debug;
     NSMutableArray *pinsToDelete;
     
-    NSArray *allRoutes;
-    
-    NSMutableSet *routes;
-    NSMutableSet *settingsRoutes;
+    RoutHandler *routes;
     
     BOOL shouldUpdateView;
     
@@ -33,8 +32,6 @@
     
     NSTimeInterval lastUpdate;
     
-    NSMutableArray *busStops;
-    
     IASKAppSettingsViewController *appSettingsViewController;
     
     UIView *warningView;
@@ -45,7 +42,7 @@
 
 @property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
 
-- (void)setUpRouteUrlFromSettings;
+//- (void)setUpRouteUrlFromSettings;
 
 - (NSArray*)findAllPins;
 
@@ -54,8 +51,8 @@
 - (void)parseBusData:(NSString *)busDataString;
 
 - (void)loadSettingsView;
-- (void)loadBusStops;
+//- (void)loadBusStops;
 
--(void)findCloseBusRutesTo:(CLLocation*)location;
+//-(void)findCloseBusRutesTo:(CLLocation*)location;
 
 @end
