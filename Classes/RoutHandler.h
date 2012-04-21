@@ -25,5 +25,6 @@
 -(void)addRoutesByLocation:(CLLocation*)location;
 
 -(NSString*)url;
+-(void)debug;
 
 @end

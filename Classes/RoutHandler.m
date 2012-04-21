@@ -104,9 +104,12 @@
 
 -(NSString*)url
 {
-    
-    return [[routes allObjects] componentsJoinedByString:@"-"];
-//    return [[routes allObjects] componentsJoinedByString:kURLSplitter];
+    return [[routes allObjects] componentsJoinedByString:kURLSplitter];
+}
+
+-(void)debug
+{
+    NSLog(@"routes: %@", [[routes allObjects] componentsJoinedByString:@"-"]);
     
 }
 

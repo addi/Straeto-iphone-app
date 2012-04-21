@@ -51,7 +51,7 @@
     
     centerOfRvk = [[CLLocation alloc] initWithLatitude:kZoomLocationLat longitude:kZoomLocationLong];
     	
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(centerOfRvk.coordinate, 3000.0, 3000.0);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(centerOfRvk.coordinate, 2000.0, 2000.0);
     
     MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];                
     
