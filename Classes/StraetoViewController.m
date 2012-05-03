@@ -84,7 +84,11 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    if( updatePosition && [userLocation.location distanceFromLocation:centerOfRvk] < kMaxDistanceFromRVK)
+    CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
+    
+//    NSLog(@"ldistance: %f", [userLocation.location distanceFromLocation:centerOfRvk]);
+    
+    if( updatePosition && distaceFromRVK < kMaxDistanceFromRVK)
     {
         updatePosition = NO;
         [self.mapView setCenterCoordinate: userLocation.location.coordinate
