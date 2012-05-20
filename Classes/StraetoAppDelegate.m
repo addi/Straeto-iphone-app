@@ -8,6 +8,7 @@
 
 #import "StraetoAppDelegate.h"
 #import "StraetoViewController.h"
+#import "Constants.h"
 
 #import "TestFlight.h"
 
@@ -29,10 +30,10 @@
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     
-    [TestFlight performSelectorInBackground: @selector(takeOff:) 
-                                 withObject:@"14be936da9ef20228395ce36a8e9a666_NzYzMzAyMDEyLTAzLTMwIDAxOjMyOjA1LjE4MzgyNg"];
+    [TestFlight performSelectorInBackground:@selector(takeOff:) 
+                                 withObject:kTestFlightKey];
     
-//    [TestFlight takeOff:@"14be936da9ef20228395ce36a8e9a666_NzYzMzAyMDEyLTAzLTMwIDAxOjMyOjA1LjE4MzgyNg"];
+//    [TestFlight takeOff:kTestFlightKey];
 
     return YES;
 }

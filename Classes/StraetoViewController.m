@@ -76,7 +76,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"viewWillAppear:");
+//    NSLog(@"viewWillAppear:");
     
     [routes setUpFromSettings];
     
