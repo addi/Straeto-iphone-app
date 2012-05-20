@@ -16,6 +16,8 @@
 #import "BusBadgeView.h"
 #import "Constants.h"
 
+#import "JSONCleaner.h"
+
 #import "TestFlight.h"
 
 @interface StraetoViewController()
@@ -34,14 +36,18 @@
     [pinsToDelete release];
     [_mapView release];
     
+    [routes release];
+    
+    [centerOfRvk release];
+    
+    [appSettingsViewController release];
+    
     [super dealloc];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    [self loadBusStops];
     
     pinsToDelete = [[NSMutableArray alloc] init];
     
@@ -63,8 +69,6 @@
     
     shouldUpdateView = NO;
     
-    warningView = [self.view viewWithTag:2];
-    
     [self busDataUpdater];
 }
 
@@ -72,25 +76,32 @@
 {
     [super viewWillAppear:animated];
     
+    NSLog(@"viewWillAppear:");
+    
     [routes setUpFromSettings];
     
     updateCloseRoutes = YES;
     
     shouldUpdateView = YES;
-    showError = YES;
     
     [self fetchBusData];
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
+//    CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
     
-//    NSLog(@"ldistance: %f", [userLocation.location distanceFromLocation:centerOfRvk]);
+    double distanceFromClosestStop = [routes distanceFromClosestStopByLocation:userLocation.location];
     
-    if( updatePosition && distaceFromRVK < kMaxDistanceFromRVK)
+//    NSLog(@"distanceFromClosestStop: %f", distanceFromClosestStop);
+    
+    if( updatePosition && distanceFromClosestStop < kMaxDistanceFromStop)
     {
         updatePosition = NO;
+        
+//        NSLog(@"distance from rvk: %@", distaceFromRVK);
+//        NSLog(@"set coordinates: %f, %f", userLocation.location.coordinate.longitude, userLocation.location.coordinate.latitude);
+        
         [self.mapView setCenterCoordinate: userLocation.location.coordinate
                                  animated: YES];
     }
@@ -135,14 +146,18 @@
 {
     NSString *routesUrl = [routes url];
     
-    NSLog(@"routes: %@", routesUrl);
+//    NSLog(@"routes: %@", routesUrl);
     
     if ([routesUrl length] <= 0) 
         return;
+
     NSString *urlPath = [NSString stringWithFormat:kStraetoRoutesAPIURL, routesUrl];
     
 //    urlPath = @"http://pronasty.com/straeto.json";
+//    urlPath = @"http://arnij.com/json.3-4-5.json";
     
+//    NSLog(@"url: %@", urlPath);
+        
     NSURL *url = [NSURL URLWithString:urlPath];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -152,27 +167,29 @@
     [request setCompletionBlock:^{
         NSString *responseString = [request responseString];
         
-//        NSLog(@"responseString: %@", responseString);
+        NSString *jsonString = [JSONCleaner cleanJSONString:responseString];
         
-        [self parseBusData:responseString];        
+        [self parseBusData:jsonString];        
     }];
     
     [request setFailedBlock:^{
 
-        if(showError)
-        {
-            UIAlertView* aiv = [[[UIAlertView alloc] initWithTitle:@"Villa" message:@"Næ ekki sambandi við vefþjón" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-            
-            [aiv show];
-            
-            showError = NO;
-        }
+        warningView.text = @"Næ ekki sambandi við vefþjón";
+        warningView.hidden = NO;
+        
                 
         NSError *error = [request error];
         NSLog(@"Error: %@", error.localizedDescription);
     }];
     
     [request startAsynchronous];
+}
+
+- (NSString*)fixJson:(NSString*)jsonString
+{    
+    NSRange range = NSMakeRange ([jsonString length]-10, 10);
+    
+    return [jsonString stringByReplacingOccurrencesOfString:@"," withString:@"" options:NSCaseInsensitiveSearch range:range];
 }
 
 - (NSArray*)findAllPins
@@ -218,7 +235,10 @@
     }
     
     if (routeList != nil && [routeList count] < 1)
+    {
         warningView.hidden = NO;
+        warningView.text = @"Engir vagnar á ferð";
+    }
     
     if (warningView.hidden == NO && [routeList count] > 0)
         warningView.hidden = YES;

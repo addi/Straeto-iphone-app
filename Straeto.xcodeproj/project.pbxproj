@@ -42,6 +42,7 @@
 		685D956814B63C6E00C89ED9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685D956714B63C6E00C89ED9 /* MobileCoreServices.framework */; };
 		685D956A14B63C8D00C89ED9 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 685D956914B63C8D00C89ED9 /* libz.1.2.5.dylib */; };
 		685D956D14B64C3C00C89ED9 /* BusLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D956C14B64C3C00C89ED9 /* BusLocation.m */; };
+		68713FC91568A1430031FFCE /* JSONCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 68713FC81568A1430031FFCE /* JSONCleaner.m */; };
 		687F654714D7A1C9001E6456 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 687F654614D7A1C9001E6456 /* MainWindow-iPad.xib */; };
 		68889DEF15341ED80078B14E /* bus_stops.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68889DEE15341ED80078B14E /* bus_stops.plist */; };
 		68C75F8B15426732004B6D07 /* RoutHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75F8A15426732004B6D07 /* RoutHandler.m */; };
@@ -151,6 +152,8 @@
 		685D956914B63C8D00C89ED9 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		685D956B14B64C3C00C89ED9 /* BusLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusLocation.h; sourceTree = "<group>"; };
 		685D956C14B64C3C00C89ED9 /* BusLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusLocation.m; sourceTree = "<group>"; };
+		68713FC71568A1430031FFCE /* JSONCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONCleaner.h; sourceTree = "<group>"; };
+		68713FC81568A1430031FFCE /* JSONCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONCleaner.m; sourceTree = "<group>"; };
 		687F654614D7A1C9001E6456 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		68889DEE15341ED80078B14E /* bus_stops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = bus_stops.plist; path = Resources/bus_stops.plist; sourceTree = "<group>"; };
 		68C75F8915426732004B6D07 /* RoutHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutHandler.h; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 				C05EC89614D05507003203A5 /* Constants.h */,
 				68C75F8915426732004B6D07 /* RoutHandler.h */,
 				68C75F8A15426732004B6D07 /* RoutHandler.m */,
+				68713FC71568A1430031FFCE /* JSONCleaner.h */,
+				68713FC81568A1430031FFCE /* JSONCleaner.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -610,6 +615,7 @@
 				68DC738214C20A55009E1A00 /* IASKTextField.m in Sources */,
 				68DC73B414C757C9009E1A00 /* BusBadgeView.m in Sources */,
 				68C75F8B15426732004B6D07 /* RoutHandler.m in Sources */,
+				68713FC91568A1430031FFCE /* JSONCleaner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

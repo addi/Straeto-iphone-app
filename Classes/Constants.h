@@ -7,3 +7,5 @@
 #define kZoomLocationLong -21.89764
 #define kMaxDistanceFromRVK 10000
 #define kMaxDistanceFromGPS 250.0
+
+#define kMaxDistanceFromStop 1000.0

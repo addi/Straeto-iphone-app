@@ -9,13 +9,15 @@
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Stillingar</string>
+			<key>FooterText</key>
+			<string>Sýna leiðir sem stoppa nálægt staðsetningu þinni</string>
 		</dict>
 		
 		<dict>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Velja leiðir með gps</string>
+			<string>Sýna nálægar leiðir</string>
 			<key>Key</key>
 			<string>gps_routes</string>
 			<key>DefaultValue</key>

@@ -22,7 +22,8 @@
 
 - (void)loadBusStops;
 - (void)setUpFromSettings;
--(void)addRoutesByLocation:(CLLocation*)location;
+- (void)addRoutesByLocation:(CLLocation*)location;
+- (double)distanceFromClosestStopByLocation:(CLLocation*)location;
 
 -(NSString*)url;
 -(void)debug;

@@ -34,7 +34,7 @@
     
     IASKAppSettingsViewController *appSettingsViewController;
     
-    UIView *warningView;
+    IBOutlet UILabel *warningView;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
@@ -51,6 +51,8 @@
 - (void)parseBusData:(NSString *)busDataString;
 
 - (void)loadSettingsView;
+- (NSString*)fixJson:(NSString*)jsonString;
+
 //- (void)loadBusStops;
 
 //-(void)findCloseBusRutesTo:(CLLocation*)location;

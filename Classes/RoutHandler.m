@@ -102,6 +102,30 @@
     }
 }
 
+-(double)distanceFromClosestStopByLocation:(CLLocation*)location
+{
+    double minDistance = kMaxDistanceFromStop;
+    
+    if(!location)
+        return minDistance;
+    
+    CLLocation *tmpStopLocation;
+    
+    for(NSDictionary *stop in busStops)
+    {
+        tmpStopLocation = [stop objectForKey:@"location"];
+        
+        double distance = [location distanceFromLocation:tmpStopLocation];
+        
+        if(distance < minDistance)
+        {
+            minDistance = distance;
+        }
+    }
+    
+    return minDistance;
+}
+
 -(NSString*)url
 {
     return [[routes allObjects] componentsJoinedByString:kURLSplitter];
@@ -110,7 +134,6 @@
 -(void)debug
 {
     NSLog(@"routes: %@", [[routes allObjects] componentsJoinedByString:@"-"]);
-    
 }
 
 - (void)dealloc
