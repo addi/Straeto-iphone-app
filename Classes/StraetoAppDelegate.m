@@ -15,7 +15,7 @@
 @implementation StraetoAppDelegate
 
 @synthesize window;
-@synthesize viewController;
+//@synthesize viewController;
 @synthesize navigationController;
 
 
@@ -117,6 +117,14 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    
+    // bit of a shitmix
+    if([[navigationController viewControllers] count])
+    {
+        StraetoViewController *vc = [[navigationController viewControllers] objectAtIndex:0];
+        
+        [vc applicationDidBecomeActive];        
+    }
 }
 
 
@@ -139,7 +147,7 @@
 
 
 - (void)dealloc {
-    [viewController release];
+//    [viewController release];
     [window release];
     [navigationController release];
  

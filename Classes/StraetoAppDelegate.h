@@ -12,11 +12,11 @@
 
 @interface StraetoAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    StraetoViewController *viewController;
+//    StraetoViewController *viewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet StraetoViewController *viewController;
+//@property (nonatomic, retain) IBOutlet StraetoViewController *viewController;
 @property (retain, nonatomic) IBOutlet UINavigationController *navigationController;
 
 - (void)registerDefaultsFromSettingsBundle;

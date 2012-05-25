@@ -89,21 +89,26 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-//    CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
-    
-    double distanceFromClosestStop = [routes distanceFromClosestStopByLocation:userLocation.location];
-    
-//    NSLog(@"distanceFromClosestStop: %f", distanceFromClosestStop);
-    
-    if( updatePosition && distanceFromClosestStop < kMaxDistanceFromStop)
+    if(updatePosition)
     {
         updatePosition = NO;
         
-//        NSLog(@"distance from rvk: %@", distaceFromRVK);
-//        NSLog(@"set coordinates: %f, %f", userLocation.location.coordinate.longitude, userLocation.location.coordinate.latitude);
+//        NSLog(@"updateing position");
         
-        [self.mapView setCenterCoordinate: userLocation.location.coordinate
-                                 animated: YES];
+        //    CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
+        
+        double distanceFromClosestStop = [routes distanceFromClosestStopByLocation:userLocation.location];
+        
+        //    NSLog(@"distanceFromClosestStop: %f", distanceFromClosestStop);
+        
+        if( distanceFromClosestStop < kMaxDistanceFromStop)
+        {
+            //        NSLog(@"distance from rvk: %@", distaceFromRVK);
+            //        NSLog(@"set coordinates: %f, %f", userLocation.location.coordinate.longitude, userLocation.location.coordinate.latitude);
+            
+            [self.mapView setCenterCoordinate: userLocation.location.coordinate
+                                     animated: YES];
+        }
     }
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"gps_routes"])
@@ -277,6 +282,11 @@
     }
     
     return nil;
+}
+
+- (void)applicationDidBecomeActive
+{
+    updatePosition = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -53,6 +53,8 @@
 - (void)loadSettingsView;
 - (NSString*)fixJson:(NSString*)jsonString;
 
+- (void)applicationDidBecomeActive;
+
 //- (void)loadBusStops;
 
 //-(void)findCloseBusRutesTo:(CLLocation*)location;
