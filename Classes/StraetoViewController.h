@@ -30,6 +30,8 @@
     
     CLLocation *centerOfRvk;
     
+    CLLocation *lastLocation;
+    
     NSTimeInterval lastUpdate;
     
     IASKAppSettingsViewController *appSettingsViewController;
@@ -41,6 +43,8 @@
 @property (readwrite, retain) NSMutableArray *pinsToDelete;
 
 @property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
+
+@property (nonatomic, retain) CLLocation *lastLocation;
 
 //- (void)setUpRouteUrlFromSettings;
 

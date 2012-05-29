@@ -28,6 +28,7 @@
 
 @synthesize mapView = _mapView;
 @synthesize pinsToDelete;
+@synthesize lastLocation;
 
 @synthesize appSettingsViewController;
 
@@ -84,11 +85,24 @@
     
     shouldUpdateView = YES;
     
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"gps_routes"] && lastLocation)
+        [routes addRoutesByLocation:lastLocation];
+    
     [self fetchBusData];
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    self.lastLocation = userLocation.location;
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"gps_routes"])
+    {
+        //        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:64.094651 longitude:-21.839232];
+        //        [routes addRoutesByLocation:testLocation];
+        
+        [routes addRoutesByLocation:userLocation.location];
+    }
+    
     if(updatePosition)
     {
         updatePosition = NO;
@@ -109,14 +123,9 @@
             [self.mapView setCenterCoordinate: userLocation.location.coordinate
                                      animated: YES];
         }
-    }
-    
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"gps_routes"])
-    {
-//        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:64.094651 longitude:-21.839232];
-//        [routes addRoutesByLocation:testLocation];
-
-        [routes addRoutesByLocation:userLocation.location];
+        
+        // a awkward fix
+        [self fetchBusData];
     }
 }
 
@@ -172,7 +181,11 @@
     [request setCompletionBlock:^{
         NSString *responseString = [request responseString];
         
+//        NSLog(@"old: %@", responseString);
+        
         NSString *jsonString = [JSONCleaner cleanJSONString:responseString];
+        
+//        NSLog(@"new: %@", jsonString);
         
         [self parseBusData:jsonString];        
     }];
@@ -287,6 +300,7 @@
 - (void)applicationDidBecomeActive
 {
     updatePosition = YES;
+    self.lastLocation = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
