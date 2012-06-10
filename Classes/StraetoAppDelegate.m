@@ -30,10 +30,12 @@
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     
-    [TestFlight performSelectorInBackground:@selector(takeOff:) 
+    #ifdef kTestFlightKey
+        [TestFlight performSelectorInBackground:@selector(takeOff:) 
                                  withObject:kTestFlightKey];
     
-//    [TestFlight takeOff:kTestFlightKey];
+//        [TestFlight takeOff:kTestFlightKey];
+    #endif
 
     return YES;
 }
