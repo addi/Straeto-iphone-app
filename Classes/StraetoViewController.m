@@ -93,7 +93,18 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+//    double gpsDataAge = [userLocation.location.timestamp timeIntervalSinceNow];
+    
+    if(userLocation.location == nil) //  || gpsDataAge < -5
+    {
+        return;
+    }
+    
     self.lastLocation = userLocation.location;
+    
+//    NSLog(@"date: %@", userLocation.location.timestamp);
+//    NSLog(@"gpsDataAge: %f", gpsDataAge);
+//    NSLog(@"cords: %f, %f", userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude);
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"gps_routes"])
     {
@@ -105,6 +116,8 @@
     
     if(updatePosition)
     {
+//        NSLog(@"updatePosition");
+        
         updatePosition = NO;
         
 //        NSLog(@"updateing position");
@@ -127,6 +140,8 @@
         // a awkward fix
         [self fetchBusData];
     }
+    
+//    NSLog(@"   ");
 }
 
 - (IASKAppSettingsViewController*)appSettingsViewController
