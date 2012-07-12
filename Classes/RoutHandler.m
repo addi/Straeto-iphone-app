@@ -58,6 +58,7 @@
 - (void)setUpFromSettings
 {
     [routes removeAllObjects];
+    [settingsRoutes removeAllObjects];
     
     for (NSString *r in allRoutes)
     {
