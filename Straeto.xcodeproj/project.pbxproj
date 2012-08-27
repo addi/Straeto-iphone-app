@@ -14,7 +14,6 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* StraetoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* StraetoViewController.m */; };
-		680C8D771525788500F8A338 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 680C8D751525788500F8A338 /* libTestFlight.a */; };
 		6856F1CE15355FD100BC0BB5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */; };
 		685D953414B61B7500C89ED9 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D951C14B61B7500C89ED9 /* NSObject+SBJson.m */; };
 		685D953514B61B7500C89ED9 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D951F14B61B7500C89ED9 /* SBJsonParser.m */; };
@@ -71,6 +70,7 @@
 		68DC738E14C20A62009E1A00 /* IASKSpecifierValuesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68DC738814C20A62009E1A00 /* IASKSpecifierValuesView.xib */; };
 		68DC739014C20C13009E1A00 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DC738F14C20C13009E1A00 /* MessageUI.framework */; };
 		68DC73B414C757C9009E1A00 /* BusBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DC73B314C757C9009E1A00 /* BusBadgeView.m */; };
+		68E1AB5415EB056A00C7CDC1 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E1AB5315EB056A00C7CDC1 /* libFlurry.a */; };
 		68FB1B0E14B56C6500468CC7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FB1B0D14B56C6500468CC7 /* MapKit.framework */; };
 		68FE3BBD15097213008D9719 /* icon-small~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FE3BBB15097213008D9719 /* icon-small~ipad@2x.png */; };
 		68FE3BBE15097213008D9719 /* icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FE3BBC15097213008D9719 /* icon~ipad@2x.png */; };
@@ -96,8 +96,6 @@
 		28D7ACF70DDB3853001CB0EB /* StraetoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StraetoViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Straeto_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Straeto_Prefix.pch; sourceTree = "<group>"; };
-		680C8D751525788500F8A338 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlightLiveSdk/libTestFlight.a; sourceTree = "<group>"; };
-		680C8D761525788500F8A338 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlightLiveSdk/TestFlight.h; sourceTree = "<group>"; };
 		6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		685D951B14B61B7500C89ED9 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJson.h"; path = "JSON/NSObject+SBJson.h"; sourceTree = "<group>"; };
 		685D951C14B61B7500C89ED9 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJson.m"; path = "JSON/NSObject+SBJson.m"; sourceTree = "<group>"; };
@@ -199,6 +197,8 @@
 		68DC738F14C20C13009E1A00 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		68DC73B214C757C9009E1A00 /* BusBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusBadgeView.h; sourceTree = "<group>"; };
 		68DC73B314C757C9009E1A00 /* BusBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusBadgeView.m; sourceTree = "<group>"; };
+		68E1AB5215EB056A00C7CDC1 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Flurry/Flurry.h; sourceTree = SOURCE_ROOT; };
+		68E1AB5315EB056A00C7CDC1 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry.a; path = Flurry/libFlurry.a; sourceTree = SOURCE_ROOT; };
 		68FB1B0D14B56C6500468CC7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		68FE3BBB15097213008D9719 /* icon-small~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-small~ipad@2x.png"; path = "Resources/icon-small~ipad@2x.png"; sourceTree = "<group>"; };
 		68FE3BBC15097213008D9719 /* icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~ipad@2x.png"; path = "Resources/icon~ipad@2x.png"; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				68FB1B0E14B56C6500468CC7 /* MapKit.framework in Frameworks */,
-				680C8D771525788500F8A338 /* libTestFlight.a in Frameworks */,
+				68E1AB5415EB056A00C7CDC1 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,8 +239,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				685D954314B63B9E00C89ED9 /* ASIHTTPRequest */,
-				685D951914B61B3600C89ED9 /* JSON */,
 				1D3623240D0F684500981E51 /* StraetoAppDelegate.h */,
 				1D3623250D0F684500981E51 /* StraetoAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* StraetoViewController.h */,
@@ -269,9 +267,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */,
-				68DC734914C207EA009E1A00 /* InAppSettingsKit */,
-				680C8D741525784B00F8A338 /* TestFlightLive */,
+				688137C115EB043E0028EB62 /* External */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -307,6 +303,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */,
 				68DC738F14C20C13009E1A00 /* MessageUI.framework */,
 				685D956914B63C8D00C89ED9 /* libz.1.2.5.dylib */,
 				685D956714B63C6E00C89ED9 /* MobileCoreServices.framework */,
@@ -318,15 +315,6 @@
 				68FB1B0D14B56C6500468CC7 /* MapKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		680C8D741525784B00F8A338 /* TestFlightLive */ = {
-			isa = PBXGroup;
-			children = (
-				680C8D751525788500F8A338 /* libTestFlight.a */,
-				680C8D761525788500F8A338 /* TestFlight.h */,
-			);
-			name = TestFlightLive;
 			sourceTree = "<group>";
 		};
 		685D951314B5FF5700C89ED9 /* Icons */ = {
@@ -375,6 +363,7 @@
 				685D953314B61B7500C89ED9 /* SBJsonWriter.m */,
 			);
 			name = JSON;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		685D954314B63B9E00C89ED9 /* ASIHTTPRequest */ = {
@@ -404,6 +393,7 @@
 				685D955914B63BAC00C89ED9 /* Reachability.m */,
 			);
 			name = ASIHTTPRequest;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		687F654514D7A1C8001E6456 /* iPad */ = {
@@ -413,6 +403,27 @@
 				68D5476A14FC7233001899CB /* StraetoViewController.xib */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		688137BE15EB003B0028EB62 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				68E1AB5215EB056A00C7CDC1 /* Flurry.h */,
+				68E1AB5315EB056A00C7CDC1 /* libFlurry.a */,
+			);
+			name = Flurry;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		688137C115EB043E0028EB62 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				685D954314B63B9E00C89ED9 /* ASIHTTPRequest */,
+				685D951914B61B3600C89ED9 /* JSON */,
+				688137BE15EB003B0028EB62 /* Flurry */,
+				68DC734914C207EA009E1A00 /* InAppSettingsKit */,
+			);
+			name = External;
 			sourceTree = "<group>";
 		};
 		68DC734914C207EA009E1A00 /* InAppSettingsKit */ = {
@@ -652,6 +663,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlightLiveSdk\"",
+					"\"$(SRCROOT)/Flurry\"",
 				);
 				PRODUCT_NAME = "Strætó";
 				PROVISIONING_PROFILE = "";
@@ -677,6 +689,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlightLiveSdk\"",
+					"\"$(SRCROOT)/Flurry\"",
 				);
 				PRODUCT_NAME = "Strætó";
 				PROVISIONING_PROFILE = "";
@@ -720,6 +733,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlightLiveSdk\"",
+					"\"$(SRCROOT)/Flurry\"",
 				);
 				PRODUCT_NAME = "Strætó";
 				PROVISIONING_PROFILE = "";

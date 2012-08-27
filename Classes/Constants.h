@@ -1,4 +1,3 @@
-
 #define kStraetoRoutesAPIURL @"http://www.straeto.is/bitar/bus/livemap/json.jsp?routes=%@"
 #define kURLSplitter @"%2C"
 
@@ -9,3 +8,4 @@
 #define kMaxDistanceFromGPS 250.0
 
 #define kMaxDistanceFromStop 1000.0
+#define kMaxGPSAccuracy 1000.0

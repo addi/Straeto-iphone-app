@@ -10,7 +10,7 @@
 #import "StraetoViewController.h"
 #import "Constants.h"
 
-#import "TestFlight.h"
+#import "Flurry.h"
 
 @implementation StraetoAppDelegate
 
@@ -30,11 +30,12 @@
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     
-    #ifdef kTestFlightKey
-        [TestFlight performSelectorInBackground:@selector(takeOff:) 
-                                 withObject:kTestFlightKey];
+    #ifdef kFlurryKey
+        [Flurry startSession:kFlurryKey];
+//        [Flurry startSession:@"YOUR_API_KEY"];
     
-//        [TestFlight takeOff:kTestFlightKey];
+//        NSLog(@"Flurry");
+    
     #endif
 
     return YES;

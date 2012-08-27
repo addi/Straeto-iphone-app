@@ -18,8 +18,6 @@
 
 #import "JSONCleaner.h"
 
-#import "TestFlight.h"
-
 @interface StraetoViewController()
 - (NSArray*)findAllPins;
 @end
@@ -95,7 +93,9 @@
 {
 //    double gpsDataAge = [userLocation.location.timestamp timeIntervalSinceNow];
     
-    if(userLocation.location == nil) //  || gpsDataAge < -5
+    double accuracy = MAX(userLocation.location.horizontalAccuracy, userLocation.location.verticalAccuracy);
+    
+    if(userLocation.location == nil && accuracy > kMaxGPSAccuracy) //  || gpsDataAge < -5
     {
         return;
     }
