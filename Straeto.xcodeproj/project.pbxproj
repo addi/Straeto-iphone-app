@@ -42,6 +42,7 @@
 		685D956A14B63C8D00C89ED9 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 685D956914B63C8D00C89ED9 /* libz.1.2.5.dylib */; };
 		685D956D14B64C3C00C89ED9 /* BusLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D956C14B64C3C00C89ED9 /* BusLocation.m */; };
 		68713FC91568A1430031FFCE /* JSONCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 68713FC81568A1430031FFCE /* JSONCleaner.m */; };
+		687DFD9616091A5000D13867 /* ScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 687DFD9516091A5000D13867 /* ScheduleCell.xib */; };
 		687F654714D7A1C9001E6456 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 687F654614D7A1C9001E6456 /* MainWindow-iPad.xib */; };
 		68889DEF15341ED80078B14E /* bus_stops.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68889DEE15341ED80078B14E /* bus_stops.plist */; };
 		68C75F8B15426732004B6D07 /* RoutHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75F8A15426732004B6D07 /* RoutHandler.m */; };
@@ -154,6 +155,7 @@
 		685D956C14B64C3C00C89ED9 /* BusLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusLocation.m; sourceTree = "<group>"; };
 		68713FC71568A1430031FFCE /* JSONCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONCleaner.h; sourceTree = "<group>"; };
 		68713FC81568A1430031FFCE /* JSONCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONCleaner.m; sourceTree = "<group>"; };
+		687DFD9516091A5000D13867 /* ScheduleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ScheduleCell.xib; path = ../ScheduleCell.xib; sourceTree = "<group>"; };
 		687F654614D7A1C9001E6456 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		68889DEE15341ED80078B14E /* bus_stops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = bus_stops.plist; path = Resources/bus_stops.plist; sourceTree = "<group>"; };
 		68C75F8915426732004B6D07 /* RoutHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutHandler.h; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				68CD6F261607FF6A00E07BC1 /* ScheduleViewController.h */,
 				68CD6F271607FF6A00E07BC1 /* ScheduleViewController.m */,
 				68CD6F281607FF6A00E07BC1 /* ScheduleViewController.xib */,
+				687DFD9516091A5000D13867 /* ScheduleCell.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				68FE3BBE15097213008D9719 /* icon~ipad@2x.png in Resources */,
 				68889DEF15341ED80078B14E /* bus_stops.plist in Resources */,
 				68CD6F2A1607FF6A00E07BC1 /* ScheduleViewController.xib in Resources */,
+				687DFD9616091A5000D13867 /* ScheduleCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

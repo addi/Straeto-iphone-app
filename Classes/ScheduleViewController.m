@@ -182,25 +182,45 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    static NSString *CellNib = @"ScheduleCell";
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
-        cell.userInteractionEnabled = NO;
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//
+//        cell.userInteractionEnabled = NO;
+        
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellNib owner:self options:nil];
+        cell = (UITableViewCell *)[nib objectAtIndex:0];
     }
     
     NSDictionary *route = [[stops objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    [route valueForKey:@"times"];
+//    [route valueForKey:@"times"];
     
-    NSString *routeName = [route valueForKey:@"route"];
-    NSString *endStopName = [[route valueForKey:@"endStop"] valueForKey:@"shortName"];
+//    NSString *endStopName = 
     
-    NSString *nextBus = [[route valueForKey:@"times"] firstObject];
+//    [[route valueForKey:@"times"] firstObject]
     
-    cell.text = [NSString stringWithFormat:@"%@ - %@: %@", routeName, endStopName, nextBus];
+//    NSString *nextBus = [[route valueForKey:@"times"] firstObject];
+    
+    UILabel *routeLabel = (UILabel *) [cell viewWithTag:1];       
+    routeLabel.text = [route valueForKey:@"route"];
+    
+//    UILabel *endStopLable = (UILabel *) [cell viewWithTag:2];       
+//    endStopLable.text = [[route valueForKey:@"endStop"] valueForKey:@"shortName"];
+//    
+//    UILabel *time1Lable = (UILabel *) [cell viewWithTag:3];       
+//    time1Lable.text = [[route valueForKey:@"times"] firstObject];
+    
+//    UILabel *time2Lable = (UILabel *) [cell viewWithTag:4];       
+//    time2Lable.text = [[route valueForKey:@"times"] objectAtIndex:1];
+
+    
+    
+//    cell.text = [NSString stringWithFormat:@"%@ - %@: %@", routeName, endStopName, nextBus];
     
 //    cell.text = @"rass";
     

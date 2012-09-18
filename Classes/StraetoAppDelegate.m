@@ -26,22 +26,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self registerDefaultsFromSettingsBundle];
+
+    viewController = [[[StraetoViewController alloc] initWithNibName:@"StraetoViewController" bundle:nil] retain];
     
     scheduleViewController = [[[ScheduleViewController alloc] initWithNibName:@"ScheduleViewController" bundle:nil] retain];
     
+    appSettingsViewController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
+    
+    appSettingsViewController.title = NSLocalizedString(@"Settings", @"Stillingar");
+    appSettingsViewController.showDoneButton = NO;
+    
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navigationController, scheduleViewController, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController, scheduleViewController, appSettingsViewController, nil];
 
     self.window.rootViewController = self.tabBarController;
 
     [self.window makeKeyAndVisible];
-    
-//    self.tab
-    
-	// Set the view controller as the window's root view controller and display.
-//    self.window.rootViewController = ;
-//    [self.window makeKeyAndVisible];
-    
+        
     #ifdef kFlurryKey
         [Flurry startSession:kFlurryKey];    
     #endif

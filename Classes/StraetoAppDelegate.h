@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import "StraetoViewController.h"
 #import "ScheduleViewController.h"
+#import "IASKAppSettingsViewController.h"
 
 @class StraetoViewController;
 
 @interface StraetoAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     
+    StraetoViewController *viewController;
     ScheduleViewController *scheduleViewController;
-//    StraetoViewController *viewController;
+    IASKAppSettingsViewController *appSettingsViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

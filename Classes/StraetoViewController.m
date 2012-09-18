@@ -64,8 +64,8 @@
     
     self.title = NSLocalizedString(@"RealTimeMap", @"Rauntímakort");
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Routes", @"Leiðir") style:UIBarButtonItemStylePlain target:self action:@selector(loadSettingsView)] autorelease];
-    
+//    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Routes", @"Leiðir") style:UIBarButtonItemStylePlain target:self action:@selector(loadSettingsView)] autorelease];
+//    
     shouldUpdateView = NO;
     
     [self busDataUpdater];
@@ -152,6 +152,7 @@
         
         appSettingsViewController.title = NSLocalizedString(@"Routes", @"Leiðir");
 		appSettingsViewController.delegate = self;
+        appSettingsViewController.showDoneButton = NO;
 	}
     
 	return appSettingsViewController;
@@ -159,7 +160,6 @@
 
 - (void)loadSettingsView
 {    
-    self.appSettingsViewController.showDoneButton = NO;
 	[self.navigationController pushViewController:self.appSettingsViewController animated:YES];
 }
 
