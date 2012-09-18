@@ -45,6 +45,8 @@
 		687F654714D7A1C9001E6456 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 687F654614D7A1C9001E6456 /* MainWindow-iPad.xib */; };
 		68889DEF15341ED80078B14E /* bus_stops.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68889DEE15341ED80078B14E /* bus_stops.plist */; };
 		68C75F8B15426732004B6D07 /* RoutHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75F8A15426732004B6D07 /* RoutHandler.m */; };
+		68CD6F291607FF6A00E07BC1 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CD6F271607FF6A00E07BC1 /* ScheduleViewController.m */; };
+		68CD6F2A1607FF6A00E07BC1 /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68CD6F281607FF6A00E07BC1 /* ScheduleViewController.xib */; };
 		68D5476B14FC7233001899CB /* StraetoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D5476A14FC7233001899CB /* StraetoViewController.xib */; };
 		68DC734814C1FF89009E1A00 /* InAppSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68DC734714C1FF89009E1A00 /* InAppSettings.bundle */; };
 		68DC735C14C20A37009E1A00 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DC735714C20A37009E1A00 /* IASKAppSettingsViewController.m */; };
@@ -156,6 +158,9 @@
 		68889DEE15341ED80078B14E /* bus_stops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = bus_stops.plist; path = Resources/bus_stops.plist; sourceTree = "<group>"; };
 		68C75F8915426732004B6D07 /* RoutHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutHandler.h; sourceTree = "<group>"; };
 		68C75F8A15426732004B6D07 /* RoutHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutHandler.m; sourceTree = "<group>"; };
+		68CD6F261607FF6A00E07BC1 /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
+		68CD6F271607FF6A00E07BC1 /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
+		68CD6F281607FF6A00E07BC1 /* ScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleViewController.xib; sourceTree = "<group>"; };
 		68D5476A14FC7233001899CB /* StraetoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StraetoViewController.xib; sourceTree = "<group>"; };
 		68DC734714C1FF89009E1A00 /* InAppSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = InAppSettings.bundle; sourceTree = "<group>"; };
 		68DC735614C20A37009E1A00 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IASKAppSettingsViewController.h; path = InAppSettingsKit/Controllers/IASKAppSettingsViewController.h; sourceTree = "<group>"; };
@@ -252,6 +257,9 @@
 				68C75F8A15426732004B6D07 /* RoutHandler.m */,
 				68713FC71568A1430031FFCE /* JSONCleaner.h */,
 				68713FC81568A1430031FFCE /* JSONCleaner.m */,
+				68CD6F261607FF6A00E07BC1 /* ScheduleViewController.h */,
+				68CD6F271607FF6A00E07BC1 /* ScheduleViewController.m */,
+				68CD6F281607FF6A00E07BC1 /* ScheduleViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -574,6 +582,7 @@
 				68FE3BBD15097213008D9719 /* icon-small~ipad@2x.png in Resources */,
 				68FE3BBE15097213008D9719 /* icon~ipad@2x.png in Resources */,
 				68889DEF15341ED80078B14E /* bus_stops.plist in Resources */,
+				68CD6F2A1607FF6A00E07BC1 /* ScheduleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +636,7 @@
 				68DC73B414C757C9009E1A00 /* BusBadgeView.m in Sources */,
 				68C75F8B15426732004B6D07 /* RoutHandler.m in Sources */,
 				68713FC91568A1430031FFCE /* JSONCleaner.m in Sources */,
+				68CD6F291607FF6A00E07BC1 /* ScheduleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

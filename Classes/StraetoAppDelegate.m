@@ -15,7 +15,8 @@
 @implementation StraetoAppDelegate
 
 @synthesize window;
-//@synthesize viewController;
+@synthesize tabBarController = _tabBarController;
+
 @synthesize navigationController;
 
 
@@ -26,16 +27,23 @@
 {
     [self registerDefaultsFromSettingsBundle];
     
-	// Set the view controller as the window's root view controller and display.
-    self.window.rootViewController = self.navigationController;
+    scheduleViewController = [[[ScheduleViewController alloc] initWithNibName:@"ScheduleViewController" bundle:nil] retain];
+    
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navigationController, scheduleViewController, nil];
+
+    self.window.rootViewController = self.tabBarController;
+
     [self.window makeKeyAndVisible];
     
+//    self.tab
+    
+	// Set the view controller as the window's root view controller and display.
+//    self.window.rootViewController = ;
+//    [self.window makeKeyAndVisible];
+    
     #ifdef kFlurryKey
-        [Flurry startSession:kFlurryKey];
-//        [Flurry startSession:@"YOUR_API_KEY"];
-    
-//        NSLog(@"Flurry");
-    
+        [Flurry startSession:kFlurryKey];    
     #endif
 
     return YES;
@@ -149,13 +157,14 @@
 }
 
 
-- (void)dealloc {
-//    [viewController release];
+- (void)dealloc
+{
     [window release];
     [navigationController release];
- 
+    [_tabBarController release];
+    [scheduleViewController release];
+    
     [super dealloc];
 }
-
 
 @end
