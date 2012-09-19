@@ -25,15 +25,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if(self)
-    {
-        NSLog(@"lol");
-        
+    {        
         self.title = NSLocalizedString(@"Schedule", @"Tímatafla");
         
         self.locationManager = [[[CLLocationManager alloc] init] autorelease];
 		self.locationManager.delegate = self;
-        
-        shouldGetSchedule = YES;
         
         stops = [[NSMutableArray alloc] init];
     }
@@ -150,6 +146,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    shouldGetSchedule = YES;
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -193,39 +196,24 @@
 //        cell.userInteractionEnabled = NO;
         
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellNib owner:self options:nil];
+        
         cell = (UITableViewCell *)[nib objectAtIndex:0];
     }
     
     NSDictionary *route = [[stops objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-//    [route valueForKey:@"times"];
-    
-//    NSString *endStopName = 
-    
-//    [[route valueForKey:@"times"] firstObject]
-    
-//    NSString *nextBus = [[route valueForKey:@"times"] firstObject];
-    
     UILabel *routeLabel = (UILabel *) [cell viewWithTag:1];       
-    routeLabel.text = [route valueForKey:@"route"];
+    routeLabel.text = [[route valueForKey:@"route"] stringValue];
     
-//    UILabel *endStopLable = (UILabel *) [cell viewWithTag:2];       
-//    endStopLable.text = [[route valueForKey:@"endStop"] valueForKey:@"shortName"];
-//    
-//    UILabel *time1Lable = (UILabel *) [cell viewWithTag:3];       
-//    time1Lable.text = [[route valueForKey:@"times"] firstObject];
+    UILabel *endStopLable = (UILabel *) [cell viewWithTag:2];       
+    endStopLable.text = [[route valueForKey:@"endStop"] valueForKey:@"shortName"];
     
-//    UILabel *time2Lable = (UILabel *) [cell viewWithTag:4];       
-//    time2Lable.text = [[route valueForKey:@"times"] objectAtIndex:1];
+    UILabel *time1Lable = (UILabel *) [cell viewWithTag:3];       
+    time1Lable.text = [[route valueForKey:@"times"] firstObject];
+    
+    UILabel *time2Lable = (UILabel *) [cell viewWithTag:4];       
+    time2Lable.text = [[route valueForKey:@"times"] objectAtIndex:1];
 
-    
-    
-//    cell.text = [NSString stringWithFormat:@"%@ - %@: %@", routeName, endStopName, nextBus];
-    
-//    cell.text = @"rass";
-    
-    // Configure the cell...
-    
     return cell;
 }
 

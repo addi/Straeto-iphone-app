@@ -131,12 +131,8 @@
      */
     
     // bit of a shitmix
-    if([[navigationController viewControllers] count])
-    {
-        StraetoViewController *vc = [[navigationController viewControllers] objectAtIndex:0];
-        
-        [vc applicationDidBecomeActive];        
-    }
+
+    [viewController applicationDidBecomeActive];
 }
 
 
