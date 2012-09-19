@@ -737,7 +737,7 @@
 					armv6,
 					armv7,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: �rni J�nsson";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -750,7 +750,7 @@
 					"\"$(SRCROOT)/Flurry\"",
 				);
 				PRODUCT_NAME = "Strætó";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1DFD9A45-D36B-4953-8999-4D735492BC3A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
