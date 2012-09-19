@@ -17,9 +17,6 @@
 @synthesize window;
 @synthesize tabBarController = _tabBarController;
 
-@synthesize navigationController;
-
-
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -156,10 +153,13 @@
 
 - (void)dealloc
 {
-    [window release];
-    [navigationController release];
-    [_tabBarController release];
     [scheduleViewController release];
+    [viewController release];
+    [appSettingsViewController release];
+    
+    [_tabBarController release];
+    
+    [window release];
     
     [super dealloc];
 }

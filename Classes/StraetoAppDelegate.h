@@ -23,8 +23,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-//@property (nonatomic, retain) IBOutlet StraetoViewController *viewController;
-@property (retain, nonatomic) IBOutlet UINavigationController *navigationController;
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
