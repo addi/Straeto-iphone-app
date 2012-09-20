@@ -101,6 +101,8 @@
     
     int lastStopId = -1;
     
+    [stops removeAllObjects];
+    
     for(NSDictionary *r in routes)
     {
 //        NSString *routeName = [r valueForKey:@"route"];        
