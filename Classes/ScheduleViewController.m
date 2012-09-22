@@ -19,6 +19,7 @@
 @implementation ScheduleViewController
 
 @synthesize locationManager;
+@synthesize location;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,12 +59,11 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    if (shouldGetSchedule)
-    {        
-        [self fetchSchedule:newLocation];
-        
-        shouldGetSchedule = NO;
-    }
+    NSLog(@"newLocation");
+    
+    self.location = newLocation;
+    
+    [self fetchSchedule];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -71,9 +71,9 @@
     NSLog(@"Error: %@", error);
 }
 
-- (void)fetchSchedule:(CLLocation *)newLocation
+- (void)fetchSchedule
 {
-    NSString *urlPath = [NSString stringWithFormat:kGulurAPIURL, newLocation.coordinate.latitude, newLocation.coordinate.longitude];
+    NSString *urlPath = [NSString stringWithFormat:kGulurAPIURL, location.coordinate.latitude, location.coordinate.longitude];
     
     NSLog(@"url: %@", urlPath);
         
@@ -146,7 +146,10 @@
 {
     [super viewWillAppear:animated];
     
-    shouldGetSchedule = YES;
+    if (location)
+    {
+        [self fetchSchedule];
+    }
 }
 
 - (void)viewDidUnload
@@ -175,7 +178,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[[[stops objectAtIndex:section] firstObject] valueForKey:@"stop"] valueForKey:@"shortName"];
+    return [[[[stops objectAtIndex:section] firstObject] valueForKey:@"stop"] valueForKey:@"shortName"];;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -191,20 +194,40 @@
         
         cell = (UITableViewCell *)[nib objectAtIndex:0];
     }
-    
+        
     NSDictionary *route = [[stops objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    UILabel *routeLabel = (UILabel *) [cell viewWithTag:1];       
+    UILabel *routeLabel = (UILabel *) [cell viewWithTag:1];      
     routeLabel.text = [[route valueForKey:@"route"] stringValue];
     
     UILabel *endStopLable = (UILabel *) [cell viewWithTag:2];       
     endStopLable.text = [[route valueForKey:@"endStop"] valueForKey:@"shortName"];
     
-    UILabel *time1Lable = (UILabel *) [cell viewWithTag:3];       
-    time1Lable.text = [[route valueForKey:@"times"] firstObject];
+    NSArray *times = [route valueForKey:@"times"];
     
-    UILabel *time2Lable = (UILabel *) [cell viewWithTag:4];       
-    time2Lable.text = [[route valueForKey:@"times"] objectAtIndex:1];
+    UILabel *time1Lable = (UILabel *) [cell viewWithTag:3];
+    UILabel *time2Lable = (UILabel *) [cell viewWithTag:4];
+    
+    if ([times count] > 1)
+    {
+        
+        time1Lable.text = [times objectAtIndex:0];
+        
+        time2Lable.text = [times objectAtIndex:1];
+    }
+    
+    else if([times count] == 1)
+    {
+        time1Lable.hidden = YES;
+        
+        time2Lable.text = [times objectAtIndex:0];
+    }
+    
+    else
+    {
+        time1Lable.hidden = YES;
+        time2Lable.hidden = YES;
+    }
 
     return cell;
 }
