@@ -74,6 +74,7 @@
 		68DC739014C20C13009E1A00 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DC738F14C20C13009E1A00 /* MessageUI.framework */; };
 		68DC73B414C757C9009E1A00 /* BusBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DC73B314C757C9009E1A00 /* BusBadgeView.m */; };
 		68E1AB5415EB056A00C7CDC1 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E1AB5315EB056A00C7CDC1 /* libFlurry.a */; };
+		68E9E263160FC46300062C08 /* BusStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E9E262160FC46300062C08 /* BusStop.m */; };
 		68FB1B0E14B56C6500468CC7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FB1B0D14B56C6500468CC7 /* MapKit.framework */; };
 		68FE3BBD15097213008D9719 /* icon-small~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FE3BBB15097213008D9719 /* icon-small~ipad@2x.png */; };
 		68FE3BBE15097213008D9719 /* icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FE3BBC15097213008D9719 /* icon~ipad@2x.png */; };
@@ -206,6 +207,8 @@
 		68DC73B314C757C9009E1A00 /* BusBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusBadgeView.m; sourceTree = "<group>"; };
 		68E1AB5215EB056A00C7CDC1 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Flurry/Flurry.h; sourceTree = SOURCE_ROOT; };
 		68E1AB5315EB056A00C7CDC1 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry.a; path = Flurry/libFlurry.a; sourceTree = SOURCE_ROOT; };
+		68E9E261160FC46300062C08 /* BusStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStop.h; sourceTree = "<group>"; };
+		68E9E262160FC46300062C08 /* BusStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStop.m; sourceTree = "<group>"; };
 		68FB1B0D14B56C6500468CC7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		68FE3BBB15097213008D9719 /* icon-small~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-small~ipad@2x.png"; path = "Resources/icon-small~ipad@2x.png"; sourceTree = "<group>"; };
 		68FE3BBC15097213008D9719 /* icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~ipad@2x.png"; path = "Resources/icon~ipad@2x.png"; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 				68CD6F271607FF6A00E07BC1 /* ScheduleViewController.m */,
 				68CD6F281607FF6A00E07BC1 /* ScheduleViewController.xib */,
 				687DFD9516091A5000D13867 /* ScheduleCell.xib */,
+				68E9E261160FC46300062C08 /* BusStop.h */,
+				68E9E262160FC46300062C08 /* BusStop.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -641,6 +646,7 @@
 				68C75F8B15426732004B6D07 /* RoutHandler.m in Sources */,
 				68713FC91568A1430031FFCE /* JSONCleaner.m in Sources */,
 				68CD6F291607FF6A00E07BC1 /* ScheduleViewController.m in Sources */,
+				68E9E263160FC46300062C08 /* BusStop.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

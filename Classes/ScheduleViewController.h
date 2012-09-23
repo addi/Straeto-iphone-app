@@ -16,13 +16,13 @@
     
     CLLocation *location;
     
-//    BOOL shouldGetSchedule;
-    
     NSMutableArray *stops;
 }
 
 - (void)fetchSchedule;
 - (void)parseSchduleData:(NSString *)response;
+
+- (void)addTimeToStop:(NSDictionary*)time;
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *location;
