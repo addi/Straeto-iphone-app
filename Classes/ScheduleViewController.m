@@ -30,6 +30,7 @@
     if(self)
     {        
         self.title = NSLocalizedString(@"Schedule", @"Tímatafla");
+        self.tabBarItem.image = [UIImage imageNamed:@"sheduleIcon"];
         
         self.locationManager = [[[CLLocationManager alloc] init] autorelease];
 		self.locationManager.delegate = self;

@@ -31,6 +31,7 @@
     appSettingsViewController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
     
     appSettingsViewController.title = NSLocalizedString(@"Settings", @"Stillingar");
+    appSettingsViewController.tabBarItem.image = [UIImage imageNamed:@"settingsIcon"];
     appSettingsViewController.showDoneButton = NO;
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];

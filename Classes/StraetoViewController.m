@@ -44,6 +44,19 @@
     [super dealloc];
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self)
+    {
+        self.title = NSLocalizedString(@"RealTimeMap", @"Rauntímakort");
+        self.tabBarItem.image = [UIImage imageNamed:@"mapIcon"];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -61,8 +74,6 @@
     MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];                
     
     [_mapView setRegion:adjustedRegion animated:YES];
-    
-    self.title = NSLocalizedString(@"RealTimeMap", @"Rauntímakort");
     
 //    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Routes", @"Leiðir") style:UIBarButtonItemStylePlain target:self action:@selector(loadSettingsView)] autorelease];
 //    
