@@ -24,6 +24,8 @@
 
 - (void)addTimeToStop:(NSDictionary*)time;
 
+- (void)applicationDidBecomeActive;
+
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *location;
 

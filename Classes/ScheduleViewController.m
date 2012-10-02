@@ -179,6 +179,9 @@
 
 - (void)fetchSchedule
 {
+    NSDate *fromDate = [[NSData data] dateByAddingTimeInterval:-2*60];
+    NSDate *toDate = [[NSData data] dateByAddingTimeInterval:60*60];
+    
     NSString *urlPath = [NSString stringWithFormat:kGulurAPIURL, location.coordinate.latitude, location.coordinate.longitude];
     
     NSLog(@"url: %@", urlPath);
@@ -239,6 +242,11 @@
     }
     
     [stop addTime:time];
+}
+
+- (void)applicationDidBecomeActive
+{
+    location = nil;
 }
 
 @end
