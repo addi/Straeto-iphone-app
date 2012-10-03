@@ -241,6 +241,7 @@
     NSURL *url = [NSURL URLWithString:urlPath];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setAllowCompressedResponse:YES]; 
     
     [request setCompletionBlock:^{
         NSString *responseString = [request responseString];
