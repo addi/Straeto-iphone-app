@@ -11,8 +11,6 @@
 
 #import "RoutHandler.h"
 
-#import "IASKAppSettingsViewController.h"
-
 @interface StraetoViewController : UIViewController <MKMapViewDelegate>
 {
 	MKMapView *_mapView;
@@ -34,15 +32,11 @@
     
     NSTimeInterval lastUpdate;
     
-    IASKAppSettingsViewController *appSettingsViewController;
-    
     IBOutlet UILabel *warningView;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (readwrite, retain) NSMutableArray *pinsToDelete;
-
-@property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
 
 @property (nonatomic, retain) CLLocation *lastLocation;
 
@@ -54,7 +48,6 @@
 - (void)fetchBusData;
 - (void)parseBusData:(NSString *)busDataString;
 
-- (void)loadSettingsView;
 - (NSString*)fixJson:(NSString*)jsonString;
 
 - (void)applicationDidBecomeActive;

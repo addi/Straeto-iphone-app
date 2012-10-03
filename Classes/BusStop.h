@@ -12,6 +12,8 @@
 {
     NSString *name;
     
+    int distance;
+    
     NSMutableArray *times;
 }
 
@@ -22,6 +24,6 @@
 
 
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, assign) int idNumber;
+@property (nonatomic, assign) int distance;
 
 @end

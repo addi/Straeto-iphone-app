@@ -28,8 +28,6 @@
 @synthesize pinsToDelete;
 @synthesize lastLocation;
 
-@synthesize appSettingsViewController;
-
 - (void)dealloc
 {
     [pinsToDelete release];
@@ -38,8 +36,6 @@
     [routes release];
     
     [centerOfRvk release];
-    
-    [appSettingsViewController release];
     
     [super dealloc];
 }
@@ -75,8 +71,6 @@
     
     [_mapView setRegion:adjustedRegion animated:YES];
     
-//    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Routes", @"Leiðir") style:UIBarButtonItemStylePlain target:self action:@selector(loadSettingsView)] autorelease];
-//    
     shouldUpdateView = NO;
     
     [self busDataUpdater];
@@ -153,25 +147,6 @@
     }
     
 //    NSLog(@"   ");
-}
-
-- (IASKAppSettingsViewController*)appSettingsViewController
-{	
-    if (!appSettingsViewController)
-    {
-		appSettingsViewController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
-        
-        appSettingsViewController.title = NSLocalizedString(@"Routes", @"Leiðir");
-		appSettingsViewController.delegate = self;
-        appSettingsViewController.showDoneButton = NO;
-	}
-    
-	return appSettingsViewController;
-}
-
-- (void)loadSettingsView
-{    
-	[self.navigationController pushViewController:self.appSettingsViewController animated:YES];
 }
 
 - (void)busDataUpdater

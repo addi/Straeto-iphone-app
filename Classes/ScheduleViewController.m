@@ -14,6 +14,9 @@
 
 #import "BusStop.h"
 
+#define ISO_TIMEZONE_UTC_FORMAT @"Z"
+#define ISO_TIMEZONE_OFFSET_FORMAT @"%+02d%02d"
+
 @interface ScheduleViewController ()
 
 @end
@@ -101,6 +104,23 @@
     return [[stops objectAtIndex:section] timesCount];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    BusStop *tmpStop = [stops objectAtIndex:section];
+    
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ScheduleHeader" owner:self options:nil];
+    UIView *view = (UIView *)[nib objectAtIndex:0];
+    
+    UILabel *titleLable = (UILabel *) [view viewWithTag:1];
+    titleLable.text = tmpStop.name;
+    
+    UILabel *distanceLabel = (UILabel *) [view viewWithTag:2];
+    
+    distanceLabel.text = [NSString stringWithFormat:@"%d m", tmpStop.distance];
+    
+    return view;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     BusStop *tmpStop = [stops objectAtIndex:section];
@@ -177,12 +197,44 @@
     NSLog(@"Error: %@", error);
 }
 
+- (NSString *)strFromISO8601:(NSDate *)date
+{
+    static NSDateFormatter* sISO8601 = nil;
+    
+    if (!sISO8601)
+    {
+        sISO8601 = [[NSDateFormatter alloc] init];
+        
+        NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+        int offset = [timeZone secondsFromGMT];
+        
+        NSMutableString *strFormat = [NSMutableString stringWithString:@"yyyy-MM-dd'T'HH:mm:ss"];
+        offset /= 60; //bring down to minutes
+        
+        if (offset == 0)
+            [strFormat appendString:ISO_TIMEZONE_UTC_FORMAT];
+        else
+            [strFormat appendFormat:ISO_TIMEZONE_OFFSET_FORMAT, offset / 60, offset % 60];
+        
+        [sISO8601 setTimeStyle:NSDateFormatterFullStyle];
+        [sISO8601 setDateFormat:strFormat];
+    }
+
+    return[sISO8601 stringFromDate:date];
+}
+
 - (void)fetchSchedule
 {
-    NSDate *fromDate = [[NSData data] dateByAddingTimeInterval:-2*60];
-    NSDate *toDate = [[NSData data] dateByAddingTimeInterval:60*60];
+    NSDate *fromDate = [[NSDate date] dateByAddingTimeInterval:-2*60];
+    NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:60*60];
     
-    NSString *urlPath = [NSString stringWithFormat:kGulurAPIURL, location.coordinate.latitude, location.coordinate.longitude];
+    NSString *fromString = [self strFromISO8601:fromDate];
+    NSString *toString = [self strFromISO8601:toDate];
+    
+    NSLog(@"from date: %@", fromString);
+    NSLog(@"to date: %@", toString);
+    
+    NSString *urlPath = [NSString stringWithFormat:kGulurAPIURL, location.coordinate.latitude, location.coordinate.longitude, fromString, toString];
     
     NSLog(@"url: %@", urlPath);
     
@@ -215,6 +267,20 @@
         [self addTimeToStop:r];
     }
     
+    if ([routes count] > 0)
+    {
+        NSLog(@"found routes");
+        warningView.hidden = YES;
+    }
+    
+    else
+    {
+        NSLog(@"No routes");
+        
+        warningView.hidden = NO;
+        warningView.text = @"Engir vagnar á ferð";
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -237,6 +303,12 @@
     if(!stop)
     {
         stop = [[BusStop alloc] initWithName:stopName];
+        
+        NSArray *locationArray = [[time valueForKey:@"stop"] valueForKey:@"location"];
+        
+        CLLocation *stopLocation = [[[CLLocation alloc] initWithLatitude:[[locationArray objectAtIndex:0] doubleValue] longitude:[[locationArray objectAtIndex:1] doubleValue]] autorelease];
+        
+        stop.distance = [location distanceFromLocation:stopLocation];
         
         [stops addObject:stop];
     }

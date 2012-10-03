@@ -10,6 +10,8 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+#import "NJISO8601Formatter.h"
+
 @interface ScheduleViewController : UITableViewController <CLLocationManagerDelegate>
 {
     CLLocationManager *locationManager;
@@ -17,8 +19,11 @@
     CLLocation *location;
     
     NSMutableArray *stops;
+    
+    IBOutlet UILabel *warningView;
 }
 
+-(NSString *) strFromISO8601:(NSDate *)date;
 - (void)fetchSchedule;
 - (void)parseSchduleData:(NSString *)response;
 

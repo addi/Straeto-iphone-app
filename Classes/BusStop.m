@@ -10,7 +10,7 @@
 
 @implementation BusStop
 
-@synthesize name, idNumber;
+@synthesize name, distance;
 
 - (id)initWithName:(NSString*)theName
 {
