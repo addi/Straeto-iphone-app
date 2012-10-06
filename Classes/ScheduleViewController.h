@@ -19,8 +19,6 @@
     CLLocation *location;
     
     NSMutableArray *stops;
-    
-    IBOutlet UILabel *warningView;
 }
 
 -(NSString *) strFromISO8601:(NSDate *)date;

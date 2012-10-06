@@ -92,6 +92,13 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:interfaceOrientation];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -156,27 +163,47 @@
     
     UILabel *time1Lable = (UILabel *) [cell viewWithTag:3];
     UILabel *time2Lable = (UILabel *) [cell viewWithTag:4];
+    UILabel *time3Lable = (UILabel *) [cell viewWithTag:5];
+    UILabel *time4Lable = (UILabel *) [cell viewWithTag:6];
     
-    if ([times count] > 1)
+    NSArray *timeLabels = [NSArray arrayWithObjects:time1Lable, time2Lable, time3Lable, time4Lable, nil];
+    
+    int startAtLabel = 0;
+    
+    if (self.interfaceOrientation == UIDeviceOrientationPortrait || self.interfaceOrientation == UIDeviceOrientationPortraitUpsideDown)
     {
-        time1Lable.text = [times objectAtIndex:0];
+        startAtLabel = 2;
+    }
+    
+    if([times count] < 4)
+    {
+        int shouldStartAt = 4 - [times count];
         
-        time2Lable.text = [times objectAtIndex:1];
+        if(startAtLabel < shouldStartAt)
+        {
+            startAtLabel = shouldStartAt;
+        }
     }
     
-    else if([times count] == 1)
+    for (int tl = 0; tl < [timeLabels count]; tl++)
     {
-        time1Lable.hidden = YES;
+        UILabel *tmpLabel = [timeLabels objectAtIndex:tl];
         
-        time2Lable.text = [times objectAtIndex:0];
+        if(tl < startAtLabel)
+        {
+            tmpLabel.hidden = YES;
+        }
+        
+        else
+        {
+            tmpLabel.hidden = NO;
+            
+            int timeIndex = tl-startAtLabel;
+            
+            tmpLabel.text = [times objectAtIndex:timeIndex];
+        }
     }
     
-    else
-    {
-        time1Lable.hidden = YES;
-        time2Lable.hidden = YES;
-    }
-
     return cell;
 }
 
@@ -226,14 +253,11 @@
 - (void)fetchSchedule
 {
     NSDate *fromDate = [[NSDate date] dateByAddingTimeInterval:-2*60];
-    NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:60*60];
+    NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
     
     NSString *fromString = [self strFromISO8601:fromDate];
     NSString *toString = [self strFromISO8601:toDate];
-    
-    NSLog(@"from date: %@", fromString);
-    NSLog(@"to date: %@", toString);
-    
+        
     NSString *urlPath = [NSString stringWithFormat:kGulurAPIURL, location.coordinate.latitude, location.coordinate.longitude, fromString, toString];
     
     NSLog(@"url: %@", urlPath);
@@ -271,15 +295,15 @@
     if ([routes count] > 0)
     {
         NSLog(@"found routes");
-        warningView.hidden = YES;
+//        warningView.hidden = YES;
     }
     
     else
     {
         NSLog(@"No routes");
         
-        warningView.hidden = NO;
-        warningView.text = @"Engir vagnar á ferð";
+//        warningView.hidden = NO;
+//        warningView.text = @"Engir vagnar á ferð";
     }
     
     [self.tableView reloadData];
