@@ -102,17 +102,49 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{    
-    return [stops count];
+{
+    return MAX([stops count], 1);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[stops objectAtIndex:section] timesCount];
+    if ([stops count] > 0)
+    {
+        return [[stops objectAtIndex:section] timesCount];
+    }
+    
+    else
+    {
+        return 0;
+    }
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if ([stops count] == 0)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ScheduleErrorView" owner:self options:nil];
+        UIView *view = (UIView *)[nib objectAtIndex:0];
+        
+        view.userInteractionEnabled = NO;
+        
+        return view;
+    }
+    
+    else
+    {
+        return nil;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if ([stops count] == 0)
+    {
+        return nil;
+    }
+    
     BusStop *tmpStop = [stops objectAtIndex:section];
     
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ScheduleHeader" owner:self options:nil];
@@ -128,12 +160,12 @@
     return view;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    BusStop *tmpStop = [stops objectAtIndex:section];
-    
-    return tmpStop.name;
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    BusStop *tmpStop = [stops objectAtIndex:section];
+//    
+//    return tmpStop.name;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -252,8 +284,8 @@
 
 - (void)fetchSchedule
 {
-    NSDate *fromDate = [[NSDate date] dateByAddingTimeInterval:-2*60];
-    NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
+    NSDate *fromDate = [[NSDate date] dateByAddingTimeInterval:-2*60 + 60*60*4];
+    NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:2*60*60 + 60*60*4];
     
     NSString *fromString = [self strFromISO8601:fromDate];
     NSString *toString = [self strFromISO8601:toDate];
@@ -291,21 +323,7 @@
     {
         [self addTimeToStop:r];
     }
-    
-    if ([routes count] > 0)
-    {
-        NSLog(@"found routes");
-//        warningView.hidden = YES;
-    }
-    
-    else
-    {
-        NSLog(@"No routes");
         
-//        warningView.hidden = NO;
-//        warningView.text = @"Engir vagnar á ferð";
-    }
-    
     [self.tableView reloadData];
 }
 
