@@ -19,6 +19,8 @@
     CLLocation *location;
     
     NSMutableArray *stops;
+    
+    BOOL isiPad;
 }
 
 -(NSString *) strFromISO8601:(NSDate *)date;

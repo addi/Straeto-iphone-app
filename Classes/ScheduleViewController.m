@@ -39,6 +39,8 @@
 		self.locationManager.delegate = self;
         
         stops = [[NSMutableArray alloc] init];
+        
+        isiPad = ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad );
     }
     
     return self;
@@ -160,12 +162,10 @@
     return view;
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    BusStop *tmpStop = [stops objectAtIndex:section];
-//    
-//    return tmpStop.name;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -202,7 +202,7 @@
     
     int startAtLabel = 0;
     
-    if (self.interfaceOrientation == UIDeviceOrientationPortrait || self.interfaceOrientation == UIDeviceOrientationPortraitUpsideDown)
+    if ((self.interfaceOrientation == UIDeviceOrientationPortrait || self.interfaceOrientation == UIDeviceOrientationPortraitUpsideDown) && !isiPad)
     {
         startAtLabel = 2;
     }
@@ -284,8 +284,11 @@
 
 - (void)fetchSchedule
 {
-    NSDate *fromDate = [[NSDate date] dateByAddingTimeInterval:-2*60 + 60*60*4];
-    NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:2*60*60 + 60*60*4];
+    NSDate *fromDate = [[NSDate date] dateByAddingTimeInterval:-2*60];
+    NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
+    
+//    fromDate = [fromDate dateByAddingTimeInterval:-60*60*4];
+//    toDate = [fromDate dateByAddingTimeInterval:-60*60*4];
     
     NSString *fromString = [self strFromISO8601:fromDate];
     NSString *toString = [self strFromISO8601:toDate];

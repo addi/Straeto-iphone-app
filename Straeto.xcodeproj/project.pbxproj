@@ -16,6 +16,7 @@
 		28D7ACF80DDB3853001CB0EB /* StraetoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* StraetoViewController.m */; };
 		682342FB161BAAF70088A776 /* ScheduleHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682342FA161BAAF70088A776 /* ScheduleHeader.xib */; };
 		682458DD1620D30C00CC515D /* ScheduleErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682458DC1620D30C00CC515D /* ScheduleErrorView.xib */; };
+		684503D31624F598003BFDF5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684503D21624F598003BFDF5 /* Default-568h@2x.png */; };
 		6856F1CE15355FD100BC0BB5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */; };
 		685D953414B61B7500C89ED9 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D951C14B61B7500C89ED9 /* NSObject+SBJson.m */; };
 		685D953514B61B7500C89ED9 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D951F14B61B7500C89ED9 /* SBJsonParser.m */; };
@@ -110,6 +111,7 @@
 		32CA4F630368D1EE00C91783 /* Straeto_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Straeto_Prefix.pch; sourceTree = "<group>"; };
 		682342FA161BAAF70088A776 /* ScheduleHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleHeader.xib; sourceTree = "<group>"; };
 		682458DC1620D30C00CC515D /* ScheduleErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleErrorView.xib; sourceTree = "<group>"; };
+		684503D21624F598003BFDF5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6856F1CD15355FD100BC0BB5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		685D951B14B61B7500C89ED9 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJson.h"; path = "JSON/NSObject+SBJson.h"; sourceTree = "<group>"; };
 		685D951C14B61B7500C89ED9 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJson.m"; path = "JSON/NSObject+SBJson.m"; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				684503D21624F598003BFDF5 /* Default-568h@2x.png */,
 				688137C115EB043E0028EB62 /* External */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -632,6 +635,7 @@
 				6878B2FC161B7C1100438DFB /* sheduleIcon@2x.png in Resources */,
 				682342FB161BAAF70088A776 /* ScheduleHeader.xib in Resources */,
 				682458DD1620D30C00CC515D /* ScheduleErrorView.xib in Resources */,
+				684503D31624F598003BFDF5 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
