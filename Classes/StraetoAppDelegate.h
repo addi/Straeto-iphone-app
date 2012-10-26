@@ -14,10 +14,10 @@
 
 @class StraetoViewController;
 
-@interface StraetoAppDelegate : NSObject <UIApplicationDelegate> {
+@interface StraetoAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
     
-    StraetoViewController *viewController;
+    StraetoViewController *realTimeMapViewController;
     ScheduleViewController *scheduleViewController;
     IASKAppSettingsViewController *appSettingsViewController;
 }
@@ -26,6 +26,7 @@
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item;
 - (void)registerDefaultsFromSettingsBundle;
 
 @end

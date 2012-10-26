@@ -24,7 +24,7 @@
 {
     [self registerDefaultsFromSettingsBundle];
 
-    viewController = [[[StraetoViewController alloc] initWithNibName:@"StraetoViewController" bundle:nil] retain];
+    realTimeMapViewController = [[[StraetoViewController alloc] initWithNibName:@"StraetoViewController" bundle:nil] retain];
     
     scheduleViewController = [[[ScheduleViewController alloc] initWithNibName:@"ScheduleViewController" bundle:nil] retain];
     
@@ -35,17 +35,40 @@
     appSettingsViewController.showDoneButton = NO;
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController, scheduleViewController, appSettingsViewController, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:realTimeMapViewController, scheduleViewController, appSettingsViewController, nil];
+    
 
     self.window.rootViewController = self.tabBarController;
 
     [self.window makeKeyAndVisible];
         
     #ifdef kFlurryKey
-        [Flurry startSession:kFlurryKey];    
+        [Flurry startSession:kFlurryKey];
+    
+        self.tabBarController.delegate = self;
     #endif
 
     return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    if ([viewController isKindOfClass:[StraetoViewController class]])
+    {
+        [Flurry logEvent:@"Realtime map view selected"];
+    }
+    
+    else if ([viewController isKindOfClass:[ScheduleViewController class]])
+    {
+        [Flurry logEvent:@"Schedule view selected"];
+    }
+    
+    else if ([viewController isKindOfClass:[IASKAppSettingsViewController class]])
+    {
+        [Flurry logEvent:@"Settings view selected"];
+    }
+    
+    [Flurry logPageView];
 }
 
 - (void)registerDefaultsFromSettingsBundle
@@ -128,7 +151,7 @@
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
 
-    [viewController applicationDidBecomeActive];
+    [realTimeMapViewController applicationDidBecomeActive];
     [scheduleViewController applicationDidBecomeActive];
 }
 
@@ -154,7 +177,7 @@
 - (void)dealloc
 {
     [scheduleViewController release];
-    [viewController release];
+    [realTimeMapViewController release];
     [appSettingsViewController release];
     
     [_tabBarController release];
