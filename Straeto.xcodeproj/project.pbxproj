@@ -58,6 +58,7 @@
 		68CD6F291607FF6A00E07BC1 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CD6F271607FF6A00E07BC1 /* ScheduleViewController.m */; };
 		68CD6F2A1607FF6A00E07BC1 /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68CD6F281607FF6A00E07BC1 /* ScheduleViewController.xib */; };
 		68D5476B14FC7233001899CB /* StraetoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D5476A14FC7233001899CB /* StraetoViewController.xib */; };
+		68D5EDA7163A059400BD220D /* ScheduleHeader~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D5EDA6163A059400BD220D /* ScheduleHeader~ipad.xib */; };
 		68DC734814C1FF89009E1A00 /* InAppSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68DC734714C1FF89009E1A00 /* InAppSettings.bundle */; };
 		68DC735C14C20A37009E1A00 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DC735714C20A37009E1A00 /* IASKAppSettingsViewController.m */; };
 		68DC735D14C20A37009E1A00 /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DC735914C20A37009E1A00 /* IASKAppSettingsWebViewController.m */; };
@@ -183,6 +184,7 @@
 		68CD6F271607FF6A00E07BC1 /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		68CD6F281607FF6A00E07BC1 /* ScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleViewController.xib; sourceTree = "<group>"; };
 		68D5476A14FC7233001899CB /* StraetoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StraetoViewController.xib; sourceTree = "<group>"; };
+		68D5EDA6163A059400BD220D /* ScheduleHeader~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ScheduleHeader~ipad.xib"; sourceTree = "<group>"; };
 		68DC734714C1FF89009E1A00 /* InAppSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = InAppSettings.bundle; sourceTree = "<group>"; };
 		68DC735614C20A37009E1A00 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IASKAppSettingsViewController.h; path = InAppSettingsKit/Controllers/IASKAppSettingsViewController.h; sourceTree = "<group>"; };
 		68DC735714C20A37009E1A00 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IASKAppSettingsViewController.m; path = InAppSettingsKit/Controllers/IASKAppSettingsViewController.m; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				28D7ACF60DDB3853001CB0EB /* StraetoViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* StraetoViewController.m */,
 				682342FA161BAAF70088A776 /* ScheduleHeader.xib */,
+				68D5EDA6163A059400BD220D /* ScheduleHeader~ipad.xib */,
 				682458DC1620D30C00CC515D /* ScheduleErrorView.xib */,
 			);
 			path = Classes;
@@ -636,6 +639,7 @@
 				682342FB161BAAF70088A776 /* ScheduleHeader.xib in Resources */,
 				682458DD1620D30C00CC515D /* ScheduleErrorView.xib in Resources */,
 				684503D31624F598003BFDF5 /* Default-568h@2x.png in Resources */,
+				68D5EDA7163A059400BD220D /* ScheduleHeader~ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

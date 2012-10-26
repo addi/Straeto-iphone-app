@@ -287,8 +287,8 @@
     NSDate *fromDate = [[NSDate date] dateByAddingTimeInterval:-2*60];
     NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
     
-//    fromDate = [fromDate dateByAddingTimeInterval:-60*60*4];
-//    toDate = [fromDate dateByAddingTimeInterval:-60*60*4];
+//    fromDate = [fromDate dateByAddingTimeInterval:60*60*12];
+//    toDate = [fromDate dateByAddingTimeInterval:60*60*12];
     
     NSString *fromString = [self strFromISO8601:fromDate];
     NSString *toString = [self strFromISO8601:toDate];
