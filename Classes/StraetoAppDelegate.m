@@ -38,6 +38,10 @@
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:realTimeMapViewController, scheduleViewController, appSettingsViewController, nil];
     
 
+    self.tabBarController.navigationController.navigationBar.translucent = NO;
+    
+//    self.navigationController.navigationBar.translucent = NO;
+    
     self.window.rootViewController = self.tabBarController;
 
     [self.window makeKeyAndVisible];

@@ -23,11 +23,8 @@
     BOOL isiPad;
 }
 
--(NSString *) strFromISO8601:(NSDate *)date;
 - (void)fetchSchedule;
 - (void)parseSchduleData:(NSString *)response;
-
-- (void)addTimeToStop:(NSDictionary*)time;
 
 - (void)applicationDidBecomeActive;
 

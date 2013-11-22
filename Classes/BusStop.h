@@ -15,15 +15,22 @@
     int distance;
     
     NSMutableArray *times;
+    
+    NSArray *routes;
 }
 
+- (id)initWithData:(NSDictionary *)theData;
 - (id)initWithName:(NSString*)theName;
 - (void)addTime:(NSDictionary*)time;
+
 - (NSInteger)timesCount;
 - (NSDictionary*)timeAtRow:(NSInteger)row;
 
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, assign) int distance;
+
+
+@property (readonly) NSArray *routes;
 
 @end

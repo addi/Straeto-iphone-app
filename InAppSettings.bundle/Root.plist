@@ -12,7 +12,6 @@
 			<key>FooterText</key>
 			<string>Sýna leiðir sem stoppa nálægt staðsetningu þinni</string>
 		</dict>
-		
 		<dict>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
@@ -23,7 +22,6 @@
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
-		
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
@@ -90,7 +88,6 @@
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
-		
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
@@ -177,8 +174,6 @@
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
-		
-		
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>

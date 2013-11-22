@@ -41,6 +41,8 @@
         stops = [[NSMutableArray alloc] init];
         
         isiPad = ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad );
+        
+        self.navigationController.navigationBar.translucent = NO;
     }
     
     return self;
@@ -68,6 +70,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+    {
+        self.tableView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, 0.0f, 0.0f);
+        
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+    }
     
     [locationManager startUpdatingLocation];
 }
@@ -112,7 +123,9 @@
 {
     if ([stops count] > 0)
     {
-        return [[stops objectAtIndex:section] timesCount];
+        BusStop *tmpBusStop = stops[section];
+        
+        return [tmpBusStop.routes count];
     }
     
     else
@@ -181,17 +194,17 @@
         cell = (UITableViewCell *)[nib objectAtIndex:0];
     }
     
-    BusStop *tmpStop = [stops objectAtIndex:indexPath.section];
+    BusStop *tmpStop = stops[indexPath.section];
     
-    NSDictionary *route = [tmpStop timeAtRow:indexPath.row];
+    NSDictionary *route = tmpStop.routes[indexPath.row];
     
-    UILabel *routeLabel = (UILabel *) [cell viewWithTag:1];      
-    routeLabel.text = [[route valueForKey:@"route"] stringValue];
+    UILabel *routeLabel = (UILabel *) [cell viewWithTag:1];
+    routeLabel.text = route[@"route"];
     
     UILabel *endStopLable = (UILabel *) [cell viewWithTag:2];       
-    endStopLable.text = [[route valueForKey:@"endStop"] valueForKey:@"shortName"];
+    endStopLable.text = route[@"last_stop_name"];
     
-    NSArray *times = [route valueForKey:@"times"];
+    NSArray *times = route[@"current_times"];
     
     UILabel *time1Lable = (UILabel *) [cell viewWithTag:3];
     UILabel *time2Lable = (UILabel *) [cell viewWithTag:4];
@@ -202,7 +215,9 @@
     
     int startAtLabel = 0;
     
-    if ((self.interfaceOrientation == UIDeviceOrientationPortrait || self.interfaceOrientation == UIDeviceOrientationPortraitUpsideDown) && !isiPad)
+    if ((self.interfaceOrientation == UIDeviceOrientationPortrait ||
+         self.interfaceOrientation == UIDeviceOrientationPortraitUpsideDown) &&
+        !isiPad)
     {
         startAtLabel = 2;
     }
@@ -219,7 +234,7 @@
     
     for (int tl = 0; tl < [timeLabels count]; tl++)
     {
-        UILabel *tmpLabel = [timeLabels objectAtIndex:tl];
+        UILabel *tmpLabel = timeLabels[tl];
         
         if(tl < startAtLabel)
         {
@@ -232,7 +247,7 @@
             
             int timeIndex = tl-startAtLabel;
             
-            tmpLabel.text = [times objectAtIndex:timeIndex];
+            tmpLabel.text = times[timeIndex];
         }
     }
     
@@ -256,59 +271,26 @@
     NSLog(@"Error: %@", error);
 }
 
-- (NSString *)strFromISO8601:(NSDate *)date
-{
-    static NSDateFormatter* sISO8601 = nil;
-    
-    if (!sISO8601)
-    {
-        sISO8601 = [[NSDateFormatter alloc] init];
-        
-        NSTimeZone *timeZone = [NSTimeZone localTimeZone];
-        int offset = [timeZone secondsFromGMT];
-        
-        NSMutableString *strFormat = [NSMutableString stringWithString:@"yyyy-MM-dd'T'HH:mm:ss"];
-        offset /= 60; //bring down to minutes
-        
-        if (offset == 0)
-            [strFormat appendString:ISO_TIMEZONE_UTC_FORMAT];
-        else
-            [strFormat appendFormat:ISO_TIMEZONE_OFFSET_FORMAT, offset / 60, offset % 60];
-        
-        [sISO8601 setTimeStyle:NSDateFormatterFullStyle];
-        [sISO8601 setDateFormat:strFormat];
-    }
-
-    return[sISO8601 stringFromDate:date];
-}
-
 - (void)fetchSchedule
 {
-    NSDate *fromDate = [[NSDate date] dateByAddingTimeInterval:-2*60];
-    NSDate *toDate = [[NSDate date] dateByAddingTimeInterval:2*60*60];
-    
-//    fromDate = [fromDate dateByAddingTimeInterval:60*60*12];
-//    toDate = [fromDate dateByAddingTimeInterval:60*60*12];
-    
-    NSString *fromString = [self strFromISO8601:fromDate];
-    NSString *toString = [self strFromISO8601:toDate];
-        
-    NSString *urlPath = [NSString stringWithFormat:kGulurAPIURL, location.coordinate.latitude, location.coordinate.longitude, fromString, toString];
-    
-    NSLog(@"url: %@", urlPath);
+    NSString *urlPath = [NSString stringWithFormat:kScheduleURL,
+                         location.coordinate.latitude,
+                         location.coordinate.longitude];
     
     NSURL *url = [NSURL URLWithString:urlPath];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setAllowCompressedResponse:YES]; 
     
-    [request setCompletionBlock:^{
+    [request setCompletionBlock:^
+    {
         NSString *responseString = [request responseString];
         
         [self parseSchduleData:responseString];
     }];
     
-    [request setFailedBlock:^{
+    [request setFailedBlock:^
+    {
         NSError *error = [request error];
         NSLog(@"Error: %@", error.localizedDescription);
     }];
@@ -318,48 +300,18 @@
 
 - (void)parseSchduleData:(NSString *)response
 {
-    NSArray *routes = [response JSONValue];
+    NSArray *stopsData = [response JSONValue];
     
     [stops removeAllObjects];
     
-    for(NSDictionary *r in routes)
+    for(NSDictionary *stopData in stopsData)
     {
-        [self addTimeToStop:r];
-    }
-        
-    [self.tableView reloadData];
-}
-
-- (void)addTimeToStop:(NSDictionary*)time
-{
-    NSString *stopName = [[time valueForKey:@"stop"] valueForKey:@"shortName"];
-    
-    BusStop *stop = nil;
-    
-    for(BusStop *s in stops)
-    {
-        if ([s.name isEqualToString:stopName])
-        {
-            stop = s;
-            break;
-        }
-    }
-    
-    // add the busstop if it was not in the array
-    if(!stop)
-    {
-        stop = [[BusStop alloc] initWithName:stopName];
-        
-        NSArray *locationArray = [[time valueForKey:@"stop"] valueForKey:@"location"];
-        
-        CLLocation *stopLocation = [[[CLLocation alloc] initWithLatitude:[[locationArray objectAtIndex:0] doubleValue] longitude:[[locationArray objectAtIndex:1] doubleValue]] autorelease];
-        
-        stop.distance = [location distanceFromLocation:stopLocation];
+        BusStop *stop = [[BusStop alloc] initWithData:stopData];
         
         [stops addObject:stop];
     }
-    
-    [stop addTime:time];
+        
+    [self.tableView reloadData];
 }
 
 - (void)applicationDidBecomeActive

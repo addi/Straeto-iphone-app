@@ -10,7 +10,22 @@
 
 @implementation BusStop
 
-@synthesize name, distance;
+@synthesize name, distance, routes;
+
+- (id)initWithData:(NSDictionary *)theData
+{
+    self = [super init];
+    
+    name = theData[@"short_name"];
+    
+    distance = [theData[@"distance"] integerValue];
+    
+    routes = theData[@"routes"];
+    
+    times = [[NSMutableArray alloc] init];
+    
+    return self;
+}
 
 - (id)initWithName:(NSString*)theName
 {

@@ -26,7 +26,7 @@
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item;
+//- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item;
 - (void)registerDefaultsFromSettingsBundle;
 
 @end

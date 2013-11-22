@@ -48,6 +48,8 @@
     {
         self.title = NSLocalizedString(@"RealTimeMap", @"Rauntímakort");
         self.tabBarItem.image = [UIImage imageNamed:@"mapIcon"];
+        
+        self.navigationController.navigationBar.translucent = NO;
     }
     
     return self;
