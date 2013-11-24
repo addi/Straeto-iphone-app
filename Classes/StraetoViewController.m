@@ -50,6 +50,11 @@
         self.tabBarItem.image = [UIImage imageNamed:@"mapIcon"];
         
         self.navigationController.navigationBar.translucent = NO;
+        
+        if ([_mapView respondsToSelector:@selector(pitchEnabled)])
+        {
+            _mapView.pitchEnabled = NO;
+        }
     }
     
     return self;

@@ -80,6 +80,10 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
     }
     
+#if (TARGET_IPHONE_SIMULATOR)
+    [self fakeLocation];
+#endif
+    
     [locationManager startUpdatingLocation];
 }
 
@@ -269,6 +273,13 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"Error: %@", error);
+}
+
+- (void)fakeLocation
+{
+    location = [[CLLocation alloc] initWithLatitude:64.139398 longitude:-21.917950];
+    
+    [self fetchSchedule];
 }
 
 - (void)fetchSchedule
