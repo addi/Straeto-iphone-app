@@ -8,10 +8,7 @@
 
 #import "RealtimeLocationViewController.h"
 #import "BusLocation.h"
-#import "SBJson.h"
 #import <MessageUI/MessageUI.h>
-//#import "IASKSpecifier.h"
-//#import "IASKSettingsReader.h"
 #import "BusBadgeView.h"
 #import "Constants.h"
 
@@ -38,10 +35,21 @@
         
         self.navigationController.navigationBar.translucent = NO;
         
+        pinsToDelete = [NSMutableArray array];
+        
+        routes = [[RoutHandler alloc] init];
+        
+        centerOfRvk = [[CLLocation alloc] initWithLatitude:kZoomLocationLat longitude:kZoomLocationLong];
+        
+        updatePosition = YES;
+        shouldUpdateView = NO;
+        
         if ([_mapView respondsToSelector:@selector(pitchEnabled)])
         {
             _mapView.pitchEnabled = NO;
         }
+        
+        [self busDataUpdater];
     }
     
     return self;
@@ -51,23 +59,11 @@
 {
     [super viewDidLoad];
     
-    pinsToDelete = [NSMutableArray array];
-    
-    routes = [[RoutHandler alloc] init];
-    
-    updatePosition = YES;
-    
-    centerOfRvk = [[CLLocation alloc] initWithLatitude:kZoomLocationLat longitude:kZoomLocationLong];
-    	
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(centerOfRvk.coordinate, 2000.0, 2000.0);
     
     MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];                
     
     [_mapView setRegion:adjustedRegion animated:YES];
-    
-    shouldUpdateView = NO;
-    
-    [self busDataUpdater];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -75,8 +71,6 @@
     [super viewWillAppear:animated];
     
     [routes setUpFromSettings];
-    
-    updateCloseRoutes = YES;
     
     shouldUpdateView = YES;
     
@@ -122,7 +116,7 @@
 
     NSString *urlPath = [NSString stringWithFormat:kStraetoRoutesAPIURL, routesUrl];
     
-    urlPath = @"http://pronasty.com/straeto.json";
+//    urlPath = @"http://pronasty.com/straeto.json";
 //    urlPath = @"http://arnij.com/json.3-4-5.json";
     
 //    NSLog(@"url: %@", urlPath);
@@ -139,6 +133,8 @@
                                                          encoding:NSUTF8StringEncoding];
         
         NSString *jsonString = [JSONCleaner cleanJSONString:responseString];
+        
+        
         
         [self parseBusData:jsonString];
     }
@@ -166,35 +162,42 @@
     return pins;
 }
 
+- (id)parseJson:(NSString *)theJSON
+{
+    NSData *data = [theJSON dataUsingEncoding:NSUTF8StringEncoding];
+    
+    if (data)
+    {
+        NSError *error = nil;
+        
+        return [NSJSONSerialization JSONObjectWithData:data
+                                               options:kNilOptions
+                                                 error:&error];
+    }
+    
+    return nil;
+}
+
 - (void)parseBusData:(NSString *)busDataString
 {   
-    NSDictionary * root = [busDataString JSONValue];
+    NSDictionary * root = [self parseJson:busDataString];
     
-    NSArray *routeList = [root objectForKey:@"routes"];
+    NSArray *routeList = root[@"routes"];
     
     [pinsToDelete addObjectsFromArray:[self findAllPins]];
     
     for(NSDictionary *r in routeList)
     {
-        NSArray *busses = [r objectForKey:@"busses"];
+        NSArray *busses = r[@"busses"];
         
-        for(NSDictionary *b in busses)
+        for(NSDictionary *busInfo in busses)
         {
-            NSString *nr = [b objectForKey:@"BUSNR"];
-            NSNumber *x = [b objectForKey:@"X"];
-            NSNumber *y = [b objectForKey:@"Y"];
-            
-            NSString *from = [b objectForKey:@"FROMSTOP"];
-            NSString *to = [b objectForKey:@"TOSTOP"];
-            
-            NSString* fromTo = [NSString stringWithFormat:@"%@ → %@", from, to];
-            
-            BusLocation *annotation = [[BusLocation alloc] initWithNumber:nr
-                                                                   fromTo:fromTo
-                                                                        x:[x intValue]
-                                                                        y:[y intValue]];
-
-            [_mapView addAnnotation:annotation];
+            if ([busInfo[@"FROMSTOP"] isEqualToString:@" "] == NO && [busInfo[@"TOSTOP"] isEqualToString:@" "])
+            {
+                BusLocation *annotation = [[BusLocation alloc] initWithData:busInfo];
+                
+                [_mapView addAnnotation:annotation];
+            }
         }
     }
     
@@ -269,7 +272,6 @@
 	
 	[self setMapView:nil];
     [super viewDidUnload];
-
 }
 
 @end

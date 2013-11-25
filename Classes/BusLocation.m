@@ -10,20 +10,16 @@
 
 @implementation BusLocation
 
-@synthesize number = _number;
-@synthesize from_to = _from_to;
+@synthesize number;
 
-@synthesize x = _x, y = _y, debug;
+@synthesize debug;
 
-- (id)initWithNumber:(NSString*)number fromTo:(NSString*)fromTo x:(int)x y:(int)y
+- (id)init
 {
-    if ((self = [super init])) {
-        _number = [number copy];
-        _from_to = [fromTo copy];
-        
-        _x = x;
-        _y = y;
-        
+    self = [super init];
+    
+    if (self)
+    {
         a = 6378137.0;
         f = 1/298.257222101;
         
@@ -37,20 +33,34 @@
         rho = 45/atan2(1.0,1.0);
         
         e = sqrt(f * (2 - f));
-
     }
+    
+    return self;
+}
+
+- (id)initWithData:(NSDictionary *)theData
+{
+    self = [self init];
+    
+    if (self)
+    {
+        number = theData[@"BUSNR"];
+        
+        fromTo = [NSString stringWithFormat:@"%@ → %@",
+                  theData[@"FROMSTOP"],
+                  theData[@"TOSTOP"]];
+        
+        x = [theData[@"X"] intValue];
+        y = [theData[@"Y"] intValue];
+    }
+    
     return self;
 }
 
 - (NSString *)title
 {
-    return _from_to;
+    return fromTo;
 }
-
-//- (NSString *)subtitle
-//{
-//    return _from_to;
-//}
 
 - (double)fx:(double)p { return a * cos(p/rho)/sqrt(1 - pow(e*sin(p/rho),2)); }
 - (double)f1:(double)p { return log( (1 - p)/(1 + p) ); }
@@ -59,34 +69,20 @@
 
 - (CLLocationCoordinate2D)coordinate
 {
-
-    //NSLog(@"Asking for coordinate");
-    
-    if (debug)
-    {
-//        NSLog()
-        
-        //        NSLog("%i", _x);
-        //        NSLog("y: %i", _y);
-    }
-    
-    
-    
     dum = [self f2:(sin(lat1/rho))] - [self f2:(sin(lat2/rho))];
     sint = 2 * (log([self fx:lat1]) - log( [self fx:lat2])) / dum;
     f2sin1 = [self f2:(sin(lat1/rho))];
     pol1 = [self fx:lat1]/sint;
     polc = [self f3:latc] + 500000.0;
     peq = a * cos(latc/rho)/(sint*exp(sint*log((45-latc/2)/rho)));
-    pol = sqrt(pow(_x-500000,2) + pow(polc-_y,2));
+    pol = sqrt(pow(x-500000,2) + pow(polc-y,2));
     lat = 90 - 2 * rho * atan( exp( log( pol / peq ) / sint ) );
     lon = 0.0;
     fact = rho * cos(lat / rho) / sint / pol;
     
     double delta = 1.0;
     
-    eps = 0.00000000001;   
-
+    eps = 0.00000000001;
     
     while( delta > eps )
     {
@@ -98,15 +94,9 @@
             delta *= -1.0;
     }
     
-    lon = -(lonc + rho * atan( (500000 - _x) / (polc - _y) ) / sint);
-        
-//    NSLog(@"%f,%f", lat, lon);
+    lon = -(lonc + rho * atan( (500000 - x) / (polc - y) ) / sint);
     
-    CLLocationCoordinate2D cords;
-    cords.latitude = lat;
-    cords.longitude = lon;
-    
-    return cords;
+    return CLLocationCoordinate2DMake(lat, lon);;
 }
 
 

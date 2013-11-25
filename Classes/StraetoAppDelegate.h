@@ -12,6 +12,8 @@
 #import "ScheduleViewController.h"
 //#import "IASKAppSettingsViewController.h"
 
+#import <IASKAppSettingsViewController.h>
+
 @class RealtimeLocationViewController;
 
 @interface StraetoAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
@@ -19,7 +21,7 @@
     
     RealtimeLocationViewController *realTimeMapViewController;
     ScheduleViewController *scheduleViewController;
-//    IASKAppSettingsViewController *appSettingsViewController;
+    IASKAppSettingsViewController *appSettingsViewController;
 }
 
 @property (nonatomic, strong) IBOutlet UIWindow *window;

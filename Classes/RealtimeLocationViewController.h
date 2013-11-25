@@ -24,7 +24,6 @@
     BOOL showError;
     
     BOOL updatePosition;
-    BOOL updateCloseRoutes;
     
     CLLocation *centerOfRvk;
     

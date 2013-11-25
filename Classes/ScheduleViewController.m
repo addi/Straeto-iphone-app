@@ -132,7 +132,7 @@
     if ([stops count] == 0)
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ScheduleErrorView" owner:self options:nil];
-        UIView *view = (UIView *)[nib objectAtIndex:0];
+        UIView *view = (UIView *)nib[0];
         
         view.userInteractionEnabled = NO;
         
@@ -152,10 +152,10 @@
         return nil;
     }
     
-    BusStop *tmpStop = [stops objectAtIndex:section];
+    BusStop *tmpStop = stops[section];
     
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ScheduleHeader" owner:self options:nil];
-    UIView *view = (UIView *)[nib objectAtIndex:0];
+    UIView *view = (UIView *)nib[0];
     
     UILabel *titleLable = (UILabel *) [view viewWithTag:1];
     titleLable.text = tmpStop.name;
@@ -183,7 +183,7 @@
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellNib owner:self options:nil];
         
-        cell = (UITableViewCell *)[nib objectAtIndex:0];
+        cell = (UITableViewCell *)nib[0];
     }
     
     BusStop *tmpStop = stops[indexPath.section];
@@ -203,7 +203,7 @@
     UILabel *time3Lable = (UILabel *) [cell viewWithTag:5];
     UILabel *time4Lable = (UILabel *) [cell viewWithTag:6];
     
-    NSArray *timeLabels = [NSArray arrayWithObjects:time1Lable, time2Lable, time3Lable, time4Lable, nil];
+    NSArray *timeLabels = @[time1Lable, time2Lable, time3Lable, time4Lable];
     
     int startAtLabel = 0;
     
@@ -267,7 +267,8 @@
 
 - (void)fakeLocation
 {
-    location = [[CLLocation alloc] initWithLatitude:64.139398 longitude:-21.917950];
+    location = [[CLLocation alloc] initWithLatitude:64.139398
+                                          longitude:-21.917950];
     
     [self fetchSchedule];
 }
@@ -280,7 +281,9 @@
     
     NSURL *url = [NSURL URLWithString:urlPath];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -290,6 +293,7 @@
         [self parseSchduleData:data];
     }
                                                                                         failure:nil];
+    
     [operation start];
 }
 

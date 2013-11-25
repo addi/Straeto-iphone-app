@@ -12,7 +12,7 @@
 
 //#import "Flurry.h"
 
-//#import <Flurry.h>
+#import <Flurry.h>
 
 @implementation StraetoAppDelegate
 
@@ -30,17 +30,15 @@
     
     scheduleViewController = [[ScheduleViewController alloc] initWithNibName:@"ScheduleViewController" bundle:nil];
     
-//    appSettingsViewController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
-//    
-//    appSettingsViewController.title = NSLocalizedString(@"Settings", @"Stillingar");
-//    appSettingsViewController.tabBarItem.image = [UIImage imageNamed:@"settingsIcon"];
-//    appSettingsViewController.showDoneButton = NO;
+    appSettingsViewController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
+    
+    appSettingsViewController.title = NSLocalizedString(@"Settings", @"Stillingar");
+    appSettingsViewController.tabBarItem.image = [UIImage imageNamed:@"settingsIcon"];
+    appSettingsViewController.showDoneButton = NO;
     
     self.tabBarController = [[UITabBarController alloc] init];
     
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:realTimeMapViewController, scheduleViewController, nil];
-    
-//    self.tabBarController.viewControllers = [NSArray arrayWithObjects:realTimeMapViewController, scheduleViewController, appSettingsViewController, nil];
+    self.tabBarController.viewControllers = @[realTimeMapViewController, scheduleViewController, appSettingsViewController];
     
 
     self.tabBarController.navigationController.navigationBar.translucent = NO;
@@ -52,7 +50,7 @@
     [self.window makeKeyAndVisible];
         
     #ifdef kFlurryKey
-//        [Flurry startSession:kFlurryKey];
+        [Flurry startSession:kFlurryKey];
     
         self.tabBarController.delegate = self;
     #endif
@@ -62,22 +60,22 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-//    if ([viewController isKindOfClass:[StraetoViewController class]])
-//    {
-//        [Flurry logEvent:@"Realtime map view selected"];
-//    }
-//    
-//    else if ([viewController isKindOfClass:[ScheduleViewController class]])
-//    {
-//        [Flurry logEvent:@"Schedule view selected"];
-//    }
-//    
-//    else if ([viewController isKindOfClass:[IASKAppSettingsViewController class]])
-//    {
-//        [Flurry logEvent:@"Settings view selected"];
-//    }
-//    
-//    [Flurry logPageView];
+    if ([viewController isKindOfClass:[RealtimeLocationViewController class]])
+    {
+        [Flurry logEvent:@"Realtime map view selected"];
+    }
+    
+    else if ([viewController isKindOfClass:[ScheduleViewController class]])
+    {
+        [Flurry logEvent:@"Schedule view selected"];
+    }
+    
+    else if ([viewController isKindOfClass:[IASKAppSettingsViewController class]])
+    {
+        [Flurry logEvent:@"Settings view selected"];
+    }
+    
+    [Flurry logPageView];
 }
 
 - (void)registerDefaultsFromSettingsBundle
@@ -94,12 +92,12 @@
 	}
 
 	NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
-	NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
+	NSArray *preferences = settings[@"PreferenceSpecifiers"];
 	NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
 
 	for (NSDictionary *prefSpecification in preferences)
 	{
-        NSString *key = [prefSpecification objectForKey:@"Key"];
+        NSString *key = prefSpecification[@"Key"];
         
         if(key)
         {
@@ -109,8 +107,8 @@
             if (currentObject == nil)
             {
                 // not readable: set value from Settings.bundle
-                id objectToSet = [prefSpecification objectForKey:@"DefaultValue"];
-                [defaultsToRegister setObject:objectToSet forKey:key];
+                id objectToSet = prefSpecification[@"DefaultValue"];
+                defaultsToRegister[key] = objectToSet;
 //                NSLog(@"Setting object %@ for key %@", objectToSet, key);
             }
 
