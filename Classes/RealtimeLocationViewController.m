@@ -93,10 +93,13 @@
     {
         updatePosition = NO;
 
-//        CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
+        CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
         
-        [self.mapView setCenterCoordinate: userLocation.location.coordinate
-                                 animated: YES];
+        if (distaceFromRVK < 1000000)
+        {
+            [self.mapView setCenterCoordinate:userLocation.location.coordinate
+                                     animated:YES];
+        }
     }
 }
 

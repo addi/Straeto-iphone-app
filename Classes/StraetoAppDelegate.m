@@ -26,7 +26,7 @@
 {
     [self registerDefaultsFromSettingsBundle];
 
-    realTimeMapViewController = [[RealtimeLocationViewController alloc] initWithNibName:@"StraetoViewController" bundle:nil];
+    realTimeMapViewController = [[RealtimeLocationViewController alloc] initWithNibName:@"RealtimeLocationViewController" bundle:nil];
     
     scheduleViewController = [[ScheduleViewController alloc] initWithNibName:@"ScheduleViewController" bundle:nil];
     
