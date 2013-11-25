@@ -14,16 +14,10 @@
 {
     NSArray *allRoutes;
 
-    NSMutableSet *routes;
-    NSMutableSet *settingsRoutes;
-    
-    NSMutableArray *busStops;
+    NSMutableArray *routes;
 }
 
-- (void)loadBusStops;
 - (void)setUpFromSettings;
-- (void)addRoutesByLocation:(CLLocation*)location;
-- (double)distanceFromClosestStopByLocation:(CLLocation*)location;
 
 -(NSString*)url;
 -(void)debug;

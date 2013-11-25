@@ -22,54 +22,7 @@
     
     routes = theData[@"routes"];
     
-    times = [[NSMutableArray alloc] init];
-    
     return self;
-}
-
-- (id)initWithName:(NSString*)theName
-{
-    self = [super init];
-    
-    if (self)
-    {
-        name = theName;
-        
-        times = [[NSMutableArray alloc] init];
-    }
-    
-    return self;
-}
-
-- (void)addTime:(NSDictionary*)time
-{
-    int routeNumber = [[time valueForKey:@"route"] intValue];
-    
-    int insertIndex = 0;
-    
-    for(NSDictionary *t in times)
-    {
-        int lookupRouteNumber = [[t valueForKey:@"route"] intValue];
-        
-        if (lookupRouteNumber >= routeNumber)
-        {
-            break;
-        }
-        
-        insertIndex++;
-    }
-    
-    [times insertObject:time atIndex:insertIndex];
-}
-
-- (NSInteger)timesCount
-{
-    return [times count];
-}
-
-- (NSDictionary*)timeAtRow:(NSInteger)row
-{
-    return [times objectAtIndex:row];
 }
 
 @end

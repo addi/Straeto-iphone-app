@@ -8,21 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-#import "StraetoViewController.h"
+#import "RealtimeLocationViewController.h"
 #import "ScheduleViewController.h"
-#import "IASKAppSettingsViewController.h"
+//#import "IASKAppSettingsViewController.h"
 
-@class StraetoViewController;
+@class RealtimeLocationViewController;
 
 @interface StraetoAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
     
-    StraetoViewController *realTimeMapViewController;
+    RealtimeLocationViewController *realTimeMapViewController;
     ScheduleViewController *scheduleViewController;
-    IASKAppSettingsViewController *appSettingsViewController;
+//    IASKAppSettingsViewController *appSettingsViewController;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 

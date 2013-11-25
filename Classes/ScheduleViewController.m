@@ -8,23 +8,17 @@
 
 #import "ScheduleViewController.h"
 
-#import "ASIHTTPRequest.h"
-#import "SBJson.h"
 #import "Constants.h"
 
 #import "BusStop.h"
 
-#define ISO_TIMEZONE_UTC_FORMAT @"Z"
-#define ISO_TIMEZONE_OFFSET_FORMAT @"%+02d%02d"
+#import <AFNetworking/AFNetworking.h>
 
 @interface ScheduleViewController ()
 
 @end
 
 @implementation ScheduleViewController
-
-@synthesize locationManager;
-@synthesize location;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,8 +29,8 @@
         self.title = NSLocalizedString(@"Schedule", @"Tímatafla");
         self.tabBarItem.image = [UIImage imageNamed:@"sheduleIcon"];
         
-        self.locationManager = [[[CLLocationManager alloc] init] autorelease];
-		self.locationManager.delegate = self;
+        locationManager = [[CLLocationManager alloc] init];
+		locationManager.delegate = self;
         
         stops = [[NSMutableArray alloc] init];
         
@@ -60,12 +54,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [locationManager release];
-    
-    [super dealloc];
-}
 
 - (void)viewDidLoad
 {
@@ -258,11 +246,13 @@
     return cell;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
 {
     BOOL shouldFetchSchedule = (location == nil);
     
-    self.location = newLocation;
+    location = newLocation;
     
     if (shouldFetchSchedule)
     {
@@ -290,29 +280,21 @@
     
     NSURL *url = [NSURL URLWithString:urlPath];
     
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request setAllowCompressedResponse:YES]; 
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    [request setCompletionBlock:^
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
     {
-        NSString *responseString = [request responseString];
+        NSArray *data = JSON;
         
-        [self parseSchduleData:responseString];
-    }];
-    
-    [request setFailedBlock:^
-    {
-        NSError *error = [request error];
-        NSLog(@"Error: %@", error.localizedDescription);
-    }];
-    
-    [request startAsynchronous];
+        [self parseSchduleData:data];
+    }
+                                                                                        failure:nil];
+    [operation start];
 }
 
-- (void)parseSchduleData:(NSString *)response
+- (void)parseSchduleData:(NSArray *)stopsData
 {
-    NSArray *stopsData = [response JSONValue];
-    
     [stops removeAllObjects];
     
     for(NSDictionary *stopData in stopsData)

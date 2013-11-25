@@ -11,7 +11,7 @@
 
 #import "RoutHandler.h"
 
-@interface StraetoViewController : UIViewController <MKMapViewDelegate>
+@interface RealtimeLocationViewController : UIViewController <MKMapViewDelegate>
 {
 	MKMapView *_mapView;
     BOOL debug;
@@ -35,12 +35,7 @@
     IBOutlet UILabel *warningView;
 }
 
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (readwrite, retain) NSMutableArray *pinsToDelete;
-
-@property (nonatomic, retain) CLLocation *lastLocation;
-
-//- (void)setUpRouteUrlFromSettings;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
 
 - (NSArray*)findAllPins;
 
@@ -48,12 +43,6 @@
 - (void)fetchBusData;
 - (void)parseBusData:(NSString *)busDataString;
 
-- (NSString*)fixJson:(NSString*)jsonString;
-
 - (void)applicationDidBecomeActive;
-
-//- (void)loadBusStops;
-
-//-(void)findCloseBusRutesTo:(CLLocation*)location;
 
 @end

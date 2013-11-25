@@ -7,10 +7,12 @@
 //
 
 #import "StraetoAppDelegate.h"
-#import "StraetoViewController.h"
+#import "RealtimeLocationViewController.h"
 #import "Constants.h"
 
-#import "Flurry.h"
+//#import "Flurry.h"
+
+//#import <Flurry.h>
 
 @implementation StraetoAppDelegate
 
@@ -24,18 +26,21 @@
 {
     [self registerDefaultsFromSettingsBundle];
 
-    realTimeMapViewController = [[[StraetoViewController alloc] initWithNibName:@"StraetoViewController" bundle:nil] retain];
+    realTimeMapViewController = [[RealtimeLocationViewController alloc] initWithNibName:@"StraetoViewController" bundle:nil];
     
-    scheduleViewController = [[[ScheduleViewController alloc] initWithNibName:@"ScheduleViewController" bundle:nil] retain];
+    scheduleViewController = [[ScheduleViewController alloc] initWithNibName:@"ScheduleViewController" bundle:nil];
     
-    appSettingsViewController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
+//    appSettingsViewController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
+//    
+//    appSettingsViewController.title = NSLocalizedString(@"Settings", @"Stillingar");
+//    appSettingsViewController.tabBarItem.image = [UIImage imageNamed:@"settingsIcon"];
+//    appSettingsViewController.showDoneButton = NO;
     
-    appSettingsViewController.title = NSLocalizedString(@"Settings", @"Stillingar");
-    appSettingsViewController.tabBarItem.image = [UIImage imageNamed:@"settingsIcon"];
-    appSettingsViewController.showDoneButton = NO;
+    self.tabBarController = [[UITabBarController alloc] init];
     
-    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:realTimeMapViewController, scheduleViewController, appSettingsViewController, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:realTimeMapViewController, scheduleViewController, nil];
+    
+//    self.tabBarController.viewControllers = [NSArray arrayWithObjects:realTimeMapViewController, scheduleViewController, appSettingsViewController, nil];
     
 
     self.tabBarController.navigationController.navigationBar.translucent = NO;
@@ -47,7 +52,7 @@
     [self.window makeKeyAndVisible];
         
     #ifdef kFlurryKey
-        [Flurry startSession:kFlurryKey];
+//        [Flurry startSession:kFlurryKey];
     
         self.tabBarController.delegate = self;
     #endif
@@ -57,22 +62,22 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    if ([viewController isKindOfClass:[StraetoViewController class]])
-    {
-        [Flurry logEvent:@"Realtime map view selected"];
-    }
-    
-    else if ([viewController isKindOfClass:[ScheduleViewController class]])
-    {
-        [Flurry logEvent:@"Schedule view selected"];
-    }
-    
-    else if ([viewController isKindOfClass:[IASKAppSettingsViewController class]])
-    {
-        [Flurry logEvent:@"Settings view selected"];
-    }
-    
-    [Flurry logPageView];
+//    if ([viewController isKindOfClass:[StraetoViewController class]])
+//    {
+//        [Flurry logEvent:@"Realtime map view selected"];
+//    }
+//    
+//    else if ([viewController isKindOfClass:[ScheduleViewController class]])
+//    {
+//        [Flurry logEvent:@"Schedule view selected"];
+//    }
+//    
+//    else if ([viewController isKindOfClass:[IASKAppSettingsViewController class]])
+//    {
+//        [Flurry logEvent:@"Settings view selected"];
+//    }
+//    
+//    [Flurry logPageView];
 }
 
 - (void)registerDefaultsFromSettingsBundle
@@ -123,7 +128,6 @@
         [defs synchronize];
     }
 	
-	[defaultsToRegister release];
 }
 
 
@@ -178,17 +182,5 @@
 }
 
 
-- (void)dealloc
-{
-    [scheduleViewController release];
-    [realTimeMapViewController release];
-    [appSettingsViewController release];
-    
-    [_tabBarController release];
-    
-    [window release];
-    
-    [super dealloc];
-}
 
 @end

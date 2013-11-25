@@ -6,39 +6,26 @@
 //  Copyright 2012 ProNasty. All rights reserved.
 //
 
-#import "StraetoViewController.h"
+#import "RealtimeLocationViewController.h"
 #import "BusLocation.h"
-#import "ASIHTTPRequest.h"
 #import "SBJson.h"
 #import <MessageUI/MessageUI.h>
-#import "IASKSpecifier.h"
-#import "IASKSettingsReader.h"
+//#import "IASKSpecifier.h"
+//#import "IASKSettingsReader.h"
 #import "BusBadgeView.h"
 #import "Constants.h"
 
 #import "JSONCleaner.h"
 
-@interface StraetoViewController()
+#import <AFNetworking/AFNetworking.h>
+
+@interface RealtimeLocationViewController()
 - (NSArray*)findAllPins;
 @end
 
-@implementation StraetoViewController
+@implementation RealtimeLocationViewController
 
 @synthesize mapView = _mapView;
-@synthesize pinsToDelete;
-@synthesize lastLocation;
-
-- (void)dealloc
-{
-    [pinsToDelete release];
-    [_mapView release];
-    
-    [routes release];
-    
-    [centerOfRvk release];
-    
-    [super dealloc];
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,7 +51,7 @@
 {
     [super viewDidLoad];
     
-    pinsToDelete = [[NSMutableArray alloc] init];
+    pinsToDelete = [NSMutableArray array];
     
     routes = [[RoutHandler alloc] init];
     
@@ -87,16 +74,11 @@
 {
     [super viewWillAppear:animated];
     
-//    NSLog(@"viewWillAppear:");
-    
     [routes setUpFromSettings];
     
     updateCloseRoutes = YES;
     
     shouldUpdateView = YES;
-    
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"gps_routes"] && lastLocation)
-        [routes addRoutesByLocation:lastLocation];
     
     [self fetchBusData];
 }
@@ -112,48 +94,15 @@
         return;
     }
     
-    self.lastLocation = userLocation.location;
-    
-//    NSLog(@"date: %@", userLocation.location.timestamp);
-//    NSLog(@"gpsDataAge: %f", gpsDataAge);
-//    NSLog(@"cords: %f, %f", userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude);
-    
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"gps_routes"])
-    {
-        //        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:64.094651 longitude:-21.839232];
-        //        [routes addRoutesByLocation:testLocation];
-        
-        [routes addRoutesByLocation:userLocation.location];
-    }
-    
     if(updatePosition)
     {
-//        NSLog(@"updatePosition");
-        
         updatePosition = NO;
+
+//        CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
         
-//        NSLog(@"updateing position");
-        
-        //    CLLocationDistance distaceFromRVK = [userLocation.location distanceFromLocation:centerOfRvk];
-        
-        double distanceFromClosestStop = [routes distanceFromClosestStopByLocation:userLocation.location];
-        
-        //    NSLog(@"distanceFromClosestStop: %f", distanceFromClosestStop);
-        
-        if( distanceFromClosestStop < kMaxDistanceFromStop)
-        {
-            //        NSLog(@"distance from rvk: %@", distaceFromRVK);
-            //        NSLog(@"set coordinates: %f, %f", userLocation.location.coordinate.longitude, userLocation.location.coordinate.latitude);
-            
-            [self.mapView setCenterCoordinate: userLocation.location.coordinate
-                                     animated: YES];
-        }
-        
-        // a awkward fix
-        [self fetchBusData];
+        [self.mapView setCenterCoordinate: userLocation.location.coordinate
+                                 animated: YES];
     }
-    
-//    NSLog(@"   ");
 }
 
 - (void)busDataUpdater
@@ -168,54 +117,40 @@
 {
     NSString *routesUrl = [routes url];
     
-//    NSLog(@"routes: %@", routesUrl);
-    
     if ([routesUrl length] <= 0) 
         return;
 
     NSString *urlPath = [NSString stringWithFormat:kStraetoRoutesAPIURL, routesUrl];
     
-//    urlPath = @"http://pronasty.com/straeto.json";
+    urlPath = @"http://pronasty.com/straeto.json";
 //    urlPath = @"http://arnij.com/json.3-4-5.json";
     
 //    NSLog(@"url: %@", urlPath);
         
     NSURL *url = [NSURL URLWithString:urlPath];
     
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
-    [request setDelegate:self];
-   
-    [request setCompletionBlock:^{
-        NSString *responseString = [request responseString];
-        
-//        NSLog(@"old: %@", responseString);
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSString *responseString = [[NSString alloc] initWithData:responseObject
+                                                         encoding:NSUTF8StringEncoding];
         
         NSString *jsonString = [JSONCleaner cleanJSONString:responseString];
         
-//        NSLog(@"new: %@", jsonString);
-        
-        [self parseBusData:jsonString];        
-    }];
-    
-    [request setFailedBlock:^{
-
+        [self parseBusData:jsonString];
+    }
+                                     failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
         warningView.text = @"Næ ekki sambandi við vefþjón";
         warningView.hidden = NO;
-        
-                
-        NSError *error = [request error];
+
         NSLog(@"Error: %@", error.localizedDescription);
     }];
     
-    [request startAsynchronous];
-}
-
-- (NSString*)fixJson:(NSString*)jsonString
-{    
-    NSRange range = NSMakeRange ([jsonString length]-10, 10);
-    
-    return [jsonString stringByReplacingOccurrencesOfString:@"," withString:@"" options:NSCaseInsensitiveSearch range:range];
+    [operation start];
 }
 
 - (NSArray*)findAllPins
@@ -237,7 +172,7 @@
     
     NSArray *routeList = [root objectForKey:@"routes"];
     
-    [self.pinsToDelete addObjectsFromArray:[self findAllPins]];
+    [pinsToDelete addObjectsFromArray:[self findAllPins]];
     
     for(NSDictionary *r in routeList)
     {
@@ -254,9 +189,12 @@
             
             NSString* fromTo = [NSString stringWithFormat:@"%@ → %@", from, to];
             
-            BusLocation *annotation = [[BusLocation alloc] initWithNumber:nr fromTo:fromTo x:[x intValue] y:[y intValue]];                
-            [_mapView addAnnotation:annotation];                
-            [annotation release];
+            BusLocation *annotation = [[BusLocation alloc] initWithNumber:nr
+                                                                   fromTo:fromTo
+                                                                        x:[x intValue]
+                                                                        y:[y intValue]];
+
+            [_mapView addAnnotation:annotation];
         }
     }
     
@@ -308,7 +246,7 @@
 - (void)applicationDidBecomeActive
 {
     updatePosition = YES;
-    self.lastLocation = nil;
+    lastLocation = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

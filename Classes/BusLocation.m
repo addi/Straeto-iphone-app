@@ -109,15 +109,5 @@
     return cords;
 }
 
-- (void)dealloc
-{
-    [_number release];
-    _number = nil;
-    
-    [_from_to release];
-    _from_to = nil;
-
-    [super dealloc];
-}
 
 @end

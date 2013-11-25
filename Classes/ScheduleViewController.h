@@ -24,11 +24,7 @@
 }
 
 - (void)fetchSchedule;
-- (void)parseSchduleData:(NSString *)response;
 
 - (void)applicationDidBecomeActive;
-
-@property (nonatomic, retain) CLLocationManager *locationManager;
-@property (nonatomic, retain) CLLocation *location;
 
 @end

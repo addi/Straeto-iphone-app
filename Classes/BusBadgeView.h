@@ -15,9 +15,9 @@
 	NSString *badgeString;
 }
 
-@property (nonatomic, readwrite, retain) UIFont *badgeFont;
-@property (nonatomic, readwrite, retain) UIColor *badgeColor, *textColor;
-@property (nonatomic, readwrite, retain) NSString *badgeString;
+@property (nonatomic, readwrite, strong) UIFont *badgeFont;
+@property (nonatomic, readwrite, strong) UIColor *badgeColor, *textColor;
+@property (nonatomic, readwrite, strong) NSString *badgeString;
 
 
 @end

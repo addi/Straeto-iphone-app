@@ -35,8 +35,6 @@
 
 - (void)setBadgeString:(NSString*)string
 {
-	if(badgeString != string)
-		[badgeString release];
 	
 	badgeString = [string copy];
 	
@@ -83,14 +81,5 @@
 	}
 }
 
-- (void)dealloc
-{
-	[badgeString release];
-	[textColor release];
-	[badgeColor release];
-	[badgeFont release];
-
-    [super dealloc];
-}
 
 @end
