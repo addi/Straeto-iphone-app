@@ -9,3 +9,6 @@ build/
 xcuserdata
 
 testflight-key.txt
+
+Pods
+Podfile.lock

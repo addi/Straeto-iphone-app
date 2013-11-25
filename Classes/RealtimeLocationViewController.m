@@ -39,7 +39,8 @@
         
         routes = [[RoutHandler alloc] init];
         
-        centerOfRvk = [[CLLocation alloc] initWithLatitude:kZoomLocationLat longitude:kZoomLocationLong];
+        centerOfRvk = [[CLLocation alloc] initWithLatitude:kZoomLocationLat
+                                                 longitude:kZoomLocationLong];
         
         updatePosition = YES;
         shouldUpdateView = NO;
@@ -124,6 +125,8 @@
     NSURL *url = [NSURL URLWithString:urlPath];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    // Forced to use HttpRequest in order to clean up faulty JSON
 
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
