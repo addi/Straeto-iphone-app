@@ -124,10 +124,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				685D956814B63C6E00C89ED9 /* MobileCoreServices.framework in Frameworks */,
 				6856F1CE15355FD100BC0BB5 /* CoreLocation.framework in Frameworks */,
 				68DC739014C20C13009E1A00 /* MessageUI.framework in Frameworks */,
 				685D956A14B63C8D00C89ED9 /* libz.1.2.5.dylib in Frameworks */,
-				685D956814B63C6E00C89ED9 /* MobileCoreServices.framework in Frameworks */,
 				685D956614B63C5D00C89ED9 /* SystemConfiguration.framework in Frameworks */,
 				685D956414B63C5000C89ED9 /* CFNetwork.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -503,8 +503,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "Strætó";
-				PROVISIONING_PROFILE = "1F8C1C48-B0A2-4773-B07C-E430AC19D2FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1F8C1C48-B0A2-4773-B07C-E430AC19D2FB";
+				PROVISIONING_PROFILE = "7930CC9E-3AD8-4FF2-A9FB-F39507400409";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7930CC9E-3AD8-4FF2-A9FB-F39507400409";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -540,8 +540,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "Strætó";
-				PROVISIONING_PROFILE = "375D3509-7143-4B65-B3CD-B1A51F4D25AE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "375D3509-7143-4B65-B3CD-B1A51F4D25AE";
+				PROVISIONING_PROFILE = "3A2FF1AA-DEDA-4A7C-A4AE-481476858B68";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3A2FF1AA-DEDA-4A7C-A4AE-481476858B68";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

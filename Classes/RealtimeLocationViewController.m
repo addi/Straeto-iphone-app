@@ -78,6 +78,13 @@
     [self fetchBusData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    shouldUpdateView = NO;
+}
+
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
 //    double gpsDataAge = [userLocation.location.timestamp timeIntervalSinceNow];
@@ -119,6 +126,8 @@
         return;
 
     NSString *urlPath = [NSString stringWithFormat:kStraetoRoutesAPIURL, routesUrl];
+    
+    NSLog(@"url: %@", urlPath);
     
 //    urlPath = @"http://pronasty.com/straeto.json";
 //    urlPath = @"http://arnij.com/json.3-4-5.json";
@@ -198,7 +207,8 @@
         
         for(NSDictionary *busInfo in busses)
         {
-            if ([busInfo[@"FROMSTOP"] isEqualToString:@" "] == NO && [busInfo[@"TOSTOP"] isEqualToString:@" "])
+            if ([busInfo[@"FROMSTOP"] isEqualToString:@" "] == NO &&
+                [busInfo[@"TOSTOP"] isEqualToString:@" "] == NO)
             {
                 BusLocation *annotation = [[BusLocation alloc] initWithData:busInfo];
                 
@@ -275,7 +285,7 @@
 {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
-	
+    
 	[self setMapView:nil];
     [super viewDidUnload];
 }

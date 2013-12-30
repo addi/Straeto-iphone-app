@@ -70,9 +70,9 @@
     
 #if (TARGET_IPHONE_SIMULATOR)
     [self fakeLocation];
-#endif
-    
+#else
     [locationManager startUpdatingLocation];
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
